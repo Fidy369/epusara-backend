@@ -34,10 +34,16 @@ const deleteUser = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const replaceUser = catchAsync(async (req, res) => {
+  const user = await userService.replaceUserById(req.params.userId, req.body);
+  res.send(user);
+});
+
 module.exports = {
   createUser,
   getUsers,
   getUser,
+  replaceUser,
   updateUser,
   deleteUser,
 };

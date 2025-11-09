@@ -1,9 +1,12 @@
 const httpStatus = require('http-status').default;
 const bcrypt = require('bcrypt');
+const { PrismaClient } = require('@prisma/client');
 const tokenService = require('./token.service');
 const userService = require('./user.service');
 const ApiError = require('../utils/ApiError');
 const { tokenTypes } = require('../config/tokens');
+
+const prisma = new PrismaClient();
 
 /**
  * Login with username and password
@@ -11,15 +14,22 @@ const { tokenTypes } = require('../config/tokens');
  * @param {string} password
  * @returns {Promise<User>}
  */
-const loginUserWithEmailAndPassword = async (username, password) => {
-  const user = await userService.getUserByEmail(username);
+const loginUserWithEmailAndPassword = async (email, password) => {
+  // Find user by email
+  const user = await userService.getUserByEmail(email);
+  
+  if (!user) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
+  }
+  
   //bro why tf this library doesn't support 2y$
   let hash = user.password;
   if (hash.startsWith('$2y$')) {
     hash = hash.replace(/^\$2y\$/, '$2a$');
   }
-  if (!user || !(await bcrypt.compare(password, hash))) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect username or password');
+  
+  if (!(await bcrypt.compare(password, hash))) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
   }
   return user;
 };
