@@ -54,21 +54,10 @@ const removeAllMenusFromRole = {
   }),
 };
 
-const replaceRoleMenus = {
-  params: Joi.object().keys({
-    roleId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    menu_ids: Joi.array().items(Joi.number().integer()).required(),
-    updated_by: Joi.number().integer().required(),
-  }),
-};
-
 module.exports = {
   assignMenuToRole,
   getRoleMenus,
   getMenusByRole,
-  replaceRoleMenus,
   getRolesByMenu,
   removeMenuFromRole,
   bulkAssignMenusToRole,

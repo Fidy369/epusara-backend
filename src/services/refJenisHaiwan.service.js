@@ -59,24 +59,9 @@ const getActiveRefJenisHaiwan = async () => {
   });
 };
 
-const replaceRefJenisHaiwanById = async (id, replaceBody) => {
-  const refJenisHaiwan = await getRefJenisHaiwanById(id);
-  if (!refJenisHaiwan) {
-    throw new Error('Reference jenis haiwan not found');
-  }
-  
-  return prisma.ref_jenis_haiwan.update({
-    where: { id: parseInt(id) },
-    data: replaceBody,
-  });
-};
-
 module.exports = {
   createRefJenisHaiwan,
   getRefJenisHaiwans,
-  getRefJenisHaiwanByKod,
-  getActiveRefJenisHaiwan,
-  replaceRefJenisHaiwanById,
   getRefJenisHaiwanById,
   updateRefJenisHaiwanById,
   deleteRefJenisHaiwanById,

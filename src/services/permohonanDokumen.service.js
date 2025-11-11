@@ -69,33 +69,11 @@ const getByJenisDokumen = async (jenisDokumen) => {
   });
 };
 
-const putPermohonanDokumenById = async (id, updateBody) => {
-  const existingDoc = await prisma.permohonan_dokumen.findUnique({
-    where: { id },
-  });
-  
-  if (!existingDoc) {
-    throw new Error('Permohonan dokumen not found');
-  }
-
-  return prisma.permohonan_dokumen.update({
-    where: { id },
-    data: {
-      permohonan_id: updateBody.permohonan_id,
-      jenis_dokumen: updateBody.jenis_dokumen,
-      attachment_id: updateBody.attachment_id,
-      updated_by: updateBody.updated_by,
-      updated_at: new Date(),
-    },
-  });
-};
-
 module.exports = {
   createPermohonanDokumen,
   getPermohonanDokumen,
   getPermohonanDokumenById,
   updatePermohonanDokumenById,
-  putPermohonanDokumenById,
   deletePermohonanDokumenById,
   getByPermohonanId,
   getByJenisDokumen,

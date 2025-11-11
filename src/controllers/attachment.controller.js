@@ -52,17 +52,11 @@ const getAttachmentsByUploader = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replaceAttachment = catchAsync(async (req, res) => {
-  const attachment = await attachmentService.replaceAttachmentById(req.params.attachmentId, req.body);
-  res.send(attachment);
-});
-
 module.exports = {
   createAttachment,
   getAttachments,
   getAttachment,
   getAttachmentByUuid,
-  replaceAttachment,
   updateAttachment,
   deleteAttachment,
   getAttachmentsByType,

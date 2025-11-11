@@ -56,17 +56,11 @@ const deleteRefreshTokensByUser = catchAsync(async (req, res) => {
   res.send({ deleted_count: result.count });
 });
 
-const replaceRefreshToken = catchAsync(async (req, res) => {
-  const token = await refreshTokenService.replaceRefreshTokenById(parseInt(req.params.tokenId), req.body);
-  res.send(token);
-});
-
 module.exports = {
   createRefreshToken,
   queryRefreshTokens,
   getRefreshToken,
   getRefreshTokensByUser,
-  replaceRefreshToken,
   revokeRefreshToken,
   deleteRefreshToken,
   deleteExpiredTokens,

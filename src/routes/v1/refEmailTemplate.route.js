@@ -107,49 +107,6 @@ router
  *         description: OK
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace email template reference (full update)
- *     tags: [RefEmailTemplate]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Email template ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - kod_email_template
- *               - description
- *               - title
- *               - content
- *             properties:
- *               kod_email_template:
- *                 type: string
- *                 maxLength: 50
- *               description:
- *                 type: string
- *                 maxLength: 50
- *               title:
- *                 type: string
- *                 maxLength: 50
- *               content:
- *                 type: string
- *                 maxLength: 50
- *               is_active:
- *                 type: boolean
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
  *   patch:
  *     summary: Update email template reference
  *     tags: [RefEmailTemplate]
@@ -205,7 +162,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(refEmailTemplateValidation.getRefEmailTemplate), refEmailTemplateController.getRefEmailTemplate)
-  .put(/*auth(),*/ validate(refEmailTemplateValidation.replaceRefEmailTemplate), refEmailTemplateController.replaceRefEmailTemplate)
   .patch(/*auth(),*/ validate(refEmailTemplateValidation.updateRefEmailTemplate), refEmailTemplateController.updateRefEmailTemplate)
   .delete(/*auth(),*/ validate(refEmailTemplateValidation.deleteRefEmailTemplate), refEmailTemplateController.deleteRefEmailTemplate);
 

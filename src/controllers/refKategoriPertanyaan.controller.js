@@ -39,15 +39,9 @@ const deleteRefKategoriPertanyaan = catchAsync(async (req, res) => {
   res.status(204).send();
 });
 
-const replaceRefKategoriPertanyaan = catchAsync(async (req, res) => {
-  const result = await refKategoriPertanyaanService.replaceRefKategoriPertanyaanByKod(req.params.kod, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createRefKategoriPertanyaan,
   getRefKategoriPertanyaans,
-  replaceRefKategoriPertanyaan,
   getRefKategoriPertanyaan,
   updateRefKategoriPertanyaan,
   deleteRefKategoriPertanyaan,

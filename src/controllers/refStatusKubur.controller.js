@@ -33,17 +33,10 @@ const deleteRefStatusKubur = catchAsync(async (req, res) => {
   res.status(204).send();
 });
 
-const replaceRefStatusKubur = catchAsync(async (req, res) => {
-  const result = await refStatusKuburService.replaceRefStatusKuburByKod(req.params.kod, req.body);
-  res.send(result);
-});
-
-
 module.exports = {
   createRefStatusKubur,
   getRefStatusKuburs,
   getRefStatusKubur,
-  replaceRefStatusKubur,
   updateRefStatusKubur,
   deleteRefStatusKubur,
 };

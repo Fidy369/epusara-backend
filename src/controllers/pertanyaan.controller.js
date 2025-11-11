@@ -6,7 +6,7 @@ const { pertanyaanService } = require('../services');
 
 const createPertanyaan = catchAsync(async (req, res) => {
   const result = await pertanyaanService.createPertanyaan(req.body);
-  res.status(201).send(result); // Changed from httpStatus.CREATED to 201
+  res.status(httpStatus.CREATED).send(result);
 });
 
 const getPertanyaans = catchAsync(async (req, res) => {
@@ -29,11 +29,6 @@ const updatePertanyaan = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replacePertanyaan = catchAsync(async (req, res) => {
-  const result = await pertanyaanService.replacePertanyaanById(req.params.id, req.body);
-  res.send(result);
-});
-
 const answerPertanyaan = catchAsync(async (req, res) => {
   const result = await pertanyaanService.answerPertanyaanById(req.params.id, req.body);
   res.send(result);
@@ -49,7 +44,6 @@ module.exports = {
   getPertanyaans,
   getPertanyaan,
   updatePertanyaan,
-  replacePertanyaan,
   answerPertanyaan,
   deletePertanyaan,
 };

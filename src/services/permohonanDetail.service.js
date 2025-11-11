@@ -74,39 +74,10 @@ const deletePermohonanDetailById = async (id) => {
   return prisma.permohonan_detail.delete({ where: { id } });
 };
 
-/**
- * Replace permohonan detail (full update)
- */
-const replacePermohonanDetailById = async (id, replaceData) => {
-  const detail = await getPermohonanDetailById(id);
-  if (!detail) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Permohonan detail not found');
-  }
-  
-  // For PUT, we replace all fields, so we explicitly set defaults for fields not provided
-  const fullData = {
-    permohonan_id: replaceData.permohonan_id,
-    tapak_perkuburan_id: replaceData.tapak_perkuburan_id || null,
-    status_permohonan: replaceData.status_permohonan || 'DP',
-    status_pengebumian: replaceData.status_pengebumian || 'BS',
-    masa_dipilih_pemohon: replaceData.masa_dipilih_pemohon,
-    masa_ditetapkan_pegawai: replaceData.masa_ditetapkan_pegawai || null,
-    masa_selesai_pengebumian: replaceData.masa_selesai_pengebumian || null,
-    is_in_kawasan_mbjb: replaceData.is_in_kawasan_mbjb ?? false,
-    lot_id: replaceData.lot_id ?? 0,
-  };
-  
-  return prisma.permohonan_detail.update({
-    where: { id },
-    data: fullData
-  });
-};
-
 module.exports = {
   createPermohonanDetail,
   queryPermohonanDetails,
   getPermohonanDetailById,
-  replacePermohonanDetailById,
   getPermohonanDetailByPermohonanId,
   updatePermohonanDetailById,
   deletePermohonanDetailById,

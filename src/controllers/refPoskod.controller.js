@@ -52,16 +52,10 @@ const deletePostalCode = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-const replacePostalCode = catchAsync(async (req, res) => {
-  const postalCode = await refPoskodService.replacePostalCodeById(req.params.postalCodeId, req.body);
-  res.send(postalCode);
-});
-
 module.exports = {
   createPostalCode,
   getPostalCodes,
   getPostalCode,
-  replacePostalCode,
   getPostalCodeByCode,
   getActivePostalCodes,
   getPostalCodesByState,

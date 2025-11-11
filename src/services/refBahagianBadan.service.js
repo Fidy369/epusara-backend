@@ -1,6 +1,4 @@
 const { PrismaClient } = require('@prisma/client');
-const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
 const prisma = new PrismaClient();
 
 const createRefBahagianBadan = async (data) => {
@@ -38,41 +36,13 @@ const getRefBahagianBadanById = async (id) => {
 };
 
 const updateRefBahagianBadanById = async (id, updateBody) => {
-  const record = await getRefBahagianBadanById(id);
-  if (!record) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Reference bahagian badan not found');
-  }
   return prisma.ref_bahagian_badan.update({
     where: { kod_bahagian_badan: id },
     data: updateBody,
   });
 };
 
-// ADD THIS NEW SERVICE FOR PUT
-const replaceRefBahagianBadanById = async (id, replaceBody) => {
-  const record = await getRefBahagianBadanById(id);
-  if (!record) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Reference bahagian badan not found');
-  }
-  
-  return prisma.ref_bahagian_badan.update({
-    where: { kod_bahagian_badan: id },
-    data: {
-      kod_bahagian_badan: replaceBody.kod_bahagian_badan,
-      label_ms: replaceBody.label_ms,
-      label_en: replaceBody.label_en || null,
-      is_active: replaceBody.is_active !== undefined ? replaceBody.is_active : true,
-      updated_by: replaceBody.updated_by || null,
-      updated_at: new Date(),
-    },
-  });
-};
-
 const deleteRefBahagianBadanById = async (id) => {
-  const record = await getRefBahagianBadanById(id);
-  if (!record) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Reference bahagian badan not found');
-  }
   return prisma.ref_bahagian_badan.delete({ where: { kod_bahagian_badan: id } });
 };
 
@@ -88,6 +58,5 @@ module.exports = {
   getRefBahagianBadans,
   getRefBahagianBadanById,
   updateRefBahagianBadanById,
-  replaceRefBahagianBadanById, // ADD THIS
   deleteRefBahagianBadanById,
 };

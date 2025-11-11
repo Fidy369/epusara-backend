@@ -102,43 +102,6 @@ router
  *         description: OK
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace refresh token (full update)
- *     tags: [Refresh Tokens]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: tokenId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - user_id
- *               - token
- *               - expires_at
- *               - is_revoked
- *             properties:
- *               user_id:
- *                 type: integer
- *               token:
- *                 type: string
- *               expires_at:
- *                 type: string
- *                 format: date-time
- *               is_revoked:
- *                 type: boolean
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   delete:
  *     summary: Delete refresh token
  *     tags: [Refresh Tokens]
@@ -159,7 +122,6 @@ router
 router
   .route('/:tokenId')
   .get(auth('manageUsers'), validate(refreshTokenValidation.getRefreshToken), refreshTokenController.getRefreshToken)
-  .put(auth('manageUsers'), validate(refreshTokenValidation.replaceRefreshToken), refreshTokenController.replaceRefreshToken)
   .delete(auth('manageUsers'), validate(refreshTokenValidation.deleteRefreshToken), refreshTokenController.deleteRefreshToken);
 
 /**

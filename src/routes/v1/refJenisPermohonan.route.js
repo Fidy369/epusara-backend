@@ -105,49 +105,8 @@ router
  *         description: OK
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace application type reference (full update)
- *     tags: [RefJenisPermohonan]
- *     parameters:
- *       - in: path
- *         name: kod
- *         required: true
- *         schema:
- *           type: string
- *           maxLength: 2
- *         description: Application type code
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - kod_jenis_permohonan
- *             properties:
- *               kod_jenis_permohonan:
- *                 type: string
- *                 maxLength: 2
- *               label_ms:
- *                 type: string
- *                 maxLength: 50
- *               label_en:
- *                 type: string
- *                 maxLength: 50
- *               tempoh_sah_permohonan:
- *                 type: integer
- *                 default: 0
- *               is_active:
- *                 type: boolean
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
  *   patch:
- *     summary: Update application type reference (partial update)
+ *     summary: Update application type reference
  *     tags: [RefJenisPermohonan]
  *     parameters:
  *       - in: path
@@ -199,7 +158,6 @@ router
 router
   .route('/:kod')
   .get(/*auth(),*/ validate(refJenisPermohonanValidation.getRefJenisPermohonan), refJenisPermohonanController.getRefJenisPermohonan)
-  .put(/*auth(),*/ validate(refJenisPermohonanValidation.replaceRefJenisPermohonan), refJenisPermohonanController.replaceRefJenisPermohonan)
   .patch(/*auth(),*/ validate(refJenisPermohonanValidation.updateRefJenisPermohonan), refJenisPermohonanController.updateRefJenisPermohonan)
   .delete(/*auth(),*/ validate(refJenisPermohonanValidation.deleteRefJenisPermohonan), refJenisPermohonanController.deleteRefJenisPermohonan);
 

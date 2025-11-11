@@ -67,27 +67,11 @@ const getByStatus = {
   }),
 };
 
-const replacePermohonanBayaran = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    no_akaun: Joi.string().allow(null, ''),
-    no_bil_pelbagai: Joi.string().allow(null, ''),
-    no_resit: Joi.string().allow(null, ''),
-    permohonan_id: Joi.number().integer().required(),
-    payment_deadline: Joi.date().allow(null),
-    status_bayaran: Joi.string().valid('PENDING', 'UNPAID', 'PAID', 'FAILED').default('PENDING'),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createPermohonanBayaran,
   getPermohonanBayaran,
   getPermohonanBayaranById,
   updatePermohonanBayaran,
-  replacePermohonanBayaran,
   deletePermohonanBayaran,
   getByPermohonanId,
   getByStatus,

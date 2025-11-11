@@ -65,24 +65,9 @@ const deletePostalCode = {
   }),
 };
 
-const replacePostalCode = {
-  params: Joi.object().keys({
-    postalCodeId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    poskod: Joi.string().length(6),
-    bandar: Joi.string().max(50).required(),
-    daerah: Joi.string().max(50).required(),
-    kod_negeri: Joi.string().length(2).required(),
-    is_active: Joi.boolean(),
-    updated_by: Joi.number().integer(),
-  }),
-};
-
 module.exports = {
   createPostalCode,
   getPostalCodes,
-  replacePostalCode,
   getPostalCode,
   getPostalCodeByCode,
   getPostalCodesByState,

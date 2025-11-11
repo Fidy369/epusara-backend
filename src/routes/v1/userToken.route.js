@@ -109,44 +109,6 @@ router
  *         description: OK
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace user token
- *     tags: [User Tokens]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: tokenId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - selector
- *               - hashed_validator
- *               - expires
- *             properties:
- *               selector:
- *                 type: string
- *                 minLength: 12
- *                 maxLength: 12
- *               hashed_validator:
- *                 type: string
- *                 minLength: 64
- *                 maxLength: 64
- *               expires:
- *                 type: string
- *                 format: date-time
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
  *     summary: Update user token
  *     tags: [User Tokens]
@@ -201,7 +163,6 @@ router
 router
   .route('/:tokenId')
   .get(auth('manageUsers'), validate(userTokenValidation.getUserToken), userTokenController.getUserToken)
-  .put(auth('manageUsers'), validate(userTokenValidation.replaceUserToken), userTokenController.replaceUserToken)
   .patch(auth('manageUsers'), validate(userTokenValidation.updateUserToken), userTokenController.updateUserToken)
   .delete(auth('manageUsers'), validate(userTokenValidation.deleteUserToken), userTokenController.deleteUserToken);
 

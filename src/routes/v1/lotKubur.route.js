@@ -156,56 +156,8 @@ const router = express.Router();
  *               $ref: '#/components/schemas/LotKubur'
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace a burial lot (full update)
- *     tags: [LotKubur]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Burial lot ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - tapak_perkuburan_id
- *               - zon_id
- *             properties:
- *               tapak_perkuburan_id:
- *                 type: integer
- *               zon_id:
- *                 type: integer
- *               kod_kategori_jenazah:
- *                 type: string
- *                 maxLength: 4
- *               kategori_jenazah_id:
- *                 type: integer
- *               no_lot:
- *                 type: string
- *                 maxLength: 50
- *               kod_status_kubur:
- *                 type: string
- *                 maxLength: 2
- *               gis_id:
- *                 type: integer
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/LotKubur'
- *       "404":
- *         description: Not found
  *   patch:
- *     summary: Update a burial lot (partial update)
+ *     summary: Update a burial lot
  *     tags: [LotKubur]
  *     parameters:
  *       - in: path
@@ -274,7 +226,6 @@ router
 router
   .route('/:id')
   .get(validate(lotKuburValidation.getLotKubur), lotKuburController.getLotKubur)
-  .put(validate(lotKuburValidation.replaceLotKubur), lotKuburController.replaceLotKubur)
   .patch(validate(lotKuburValidation.updateLotKubur), lotKuburController.updateLotKubur)
   .delete(validate(lotKuburValidation.deleteLotKubur), lotKuburController.deleteLotKubur);
 

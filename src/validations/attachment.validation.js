@@ -71,26 +71,11 @@ const getAttachmentsByUploader = {
   }),
 };
 
-const replaceAttachment = {
-  params: Joi.object().keys({
-    attachmentId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    file_name: Joi.string().required(),
-    file_size: Joi.number().integer().min(0).default(0),
-    file_path: Joi.string().default('0'),
-    mime_type: Joi.string().required(),
-    extension: Joi.string().required(),
-    uploaded_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createAttachment,
   getAttachments,
   getAttachment,
   getAttachmentByUuid,
-  replaceAttachment,
   updateAttachment,
   deleteAttachment,
   getAttachmentsByType,

@@ -148,45 +148,6 @@ router
  *         description: OK
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace question category reference (full update)
- *     tags: [RefKategoriPertanyaan]
- *     parameters:
- *       - in: path
- *         name: kod
- *         required: true
- *         schema:
- *           type: string
- *           maxLength: 5
- *         description: Question category code
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - label_ms
- *               - label_en
- *             properties:
- *               label_ms:
- *                 type: string
- *                 maxLength: 50
- *               label_en:
- *                 type: string
- *                 maxLength: 50
- *               order_sequence:
- *                 type: integer
- *                 minimum: 0
- *                 default: 0
- *               is_active:
- *                 type: boolean
- *                 default: false
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
  *   delete:
  *     summary: Delete question category reference
  *     tags: [RefKategoriPertanyaan]
@@ -208,7 +169,6 @@ router
   .route('/:kod')
   .get(/*auth(),*/ validate(refKategoriPertanyaanValidation.getRefKategoriPertanyaan), refKategoriPertanyaanController.getRefKategoriPertanyaan)
   .patch(/*auth(),*/ validate(refKategoriPertanyaanValidation.updateRefKategoriPertanyaan), refKategoriPertanyaanController.updateRefKategoriPertanyaan)
-  .put(/*auth(),*/ validate(refKategoriPertanyaanValidation.replaceRefKategoriPertanyaan), refKategoriPertanyaanController.replaceRefKategoriPertanyaan)
   .delete(/*auth(),*/ validate(refKategoriPertanyaanValidation.deleteRefKategoriPertanyaan), refKategoriPertanyaanController.deleteRefKategoriPertanyaan);
 
 module.exports = router;

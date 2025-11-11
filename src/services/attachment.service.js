@@ -60,34 +60,11 @@ const getAttachmentsByUploader = async (uploadedBy) => {
   });
 };
 
-const replaceAttachmentById = async (id, replaceBody) => {
-  const attachment = await prisma.attachment.findUnique({
-    where: { id },
-  });
-  
-  if (!attachment) {
-    throw new Error('Attachment not found');
-  }
-
-  return prisma.attachment.update({
-    where: { id },
-    data: {
-      file_name: replaceBody.file_name,
-      file_size: replaceBody.file_size ?? 0,
-      file_path: replaceBody.file_path ?? '0',
-      mime_type: replaceBody.mime_type,
-      extension: replaceBody.extension,
-      uploaded_by: replaceBody.uploaded_by ?? 0,
-    },
-  });
-};
-
 module.exports = {
   createAttachment,
   getAttachments,
   getAttachmentById,
   getAttachmentByUuid,
-  replaceAttachmentById,
   updateAttachmentById,
   deleteAttachmentById,
   getAttachmentsByType,

@@ -59,24 +59,11 @@ const getByObjectType = {
   }),
 };
 
-const replaceAuditLog = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    event_id: Joi.number().integer().required(),
-    object_type: Joi.string().max(50).required(),
-    object_id: Joi.string().max(50).required(),
-    changed_data: Joi.object().allow(null),
-  }),
-};
-
 module.exports = {
   createAuditLog,
   getAuditLogs,
   getAuditLogById,
   updateAuditLog,
-  replaceAuditLog,
   deleteAuditLog,
   getByEventId,
   getByObjectType,

@@ -54,19 +54,10 @@ const deleteRunningNumber = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-const replaceRunningNumber = catchAsync(async (req, res) => {
-  const runningNumber = await permohonanRunningNumberService.replaceRunningNumber(
-    parseInt(req.params.runningNumberId),
-    req.body
-  );
-  res.send(runningNumber);
-});
-
 module.exports = {
   createRunningNumber,
   queryRunningNumbers,
   getRunningNumber,
-  replaceRunningNumber,
   getNextRunningNumber,
   incrementRunningNumber,
   resetRunningNumber,

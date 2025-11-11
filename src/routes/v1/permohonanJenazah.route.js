@@ -233,8 +233,7 @@ router
  *       "404":
  *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Partially update application deceased person
- *     description: Update one or more fields of the deceased person record (partial update)
+ *     summary: Update application deceased person
  *     tags: [PermohonanJenazah]
  *     security:
  *       - bearerAuth: []
@@ -251,7 +250,6 @@ router
  *         application/json:
  *           schema:
  *             type: object
- *             minProperties: 1
  *             properties:
  *               permohonan_id:
  *                 type: integer
@@ -285,92 +283,6 @@ router
  *               poskod:
  *                 type: string
  *                 maxLength: 6
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/PermohonanJenazah'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace application deceased person
- *     description: Complete replacement of the deceased person record (all required fields must be provided)
- *     tags: [PermohonanJenazah]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Deceased person ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - permohonan_id
- *               - nama_jenazah
- *               - kod_warganegara
- *               - jenis_pengenalan
- *               - no_pengenalan
- *               - ref_bangsa_id
- *               - kod_jantina
- *               - ref_kategori_jenazah_id
- *               - tarikh_lahir
- *               - address1
- *               - address2
- *               - address3
- *               - updated_by
- *             properties:
- *               permohonan_id:
- *                 type: integer
- *               nama_jenazah:
- *                 type: string
- *                 maxLength: 50
- *               kod_warganegara:
- *                 type: string
- *                 maxLength: 2
- *               jenis_pengenalan:
- *                 type: string
- *                 maxLength: 8
- *               no_pengenalan:
- *                 type: string
- *                 maxLength: 20
- *               ref_bangsa_id:
- *                 type: integer
- *               kod_jantina:
- *                 type: string
- *                 maxLength: 50
- *               ref_kategori_jenazah_id:
- *                 type: integer
- *               tarikh_lahir:
- *                 type: string
- *                 format: date
- *               masa_sah_kematian:
- *                 type: string
- *                 format: date-time
- *                 nullable: true
- *               address1:
- *                 type: string
- *                 maxLength: 500
- *               address2:
- *                 type: string
- *                 maxLength: 500
- *               address3:
- *                 type: string
- *                 maxLength: 500
- *               poskod:
- *                 type: string
- *                 maxLength: 6
- *                 nullable: true
  *               updated_by:
  *                 type: integer
  *     responses:
@@ -404,7 +316,6 @@ router
   .route('/:id')
   .get(/*auth(),*/ validate(permohonanJenazahValidation.getPermohonanJenazahById), permohonanJenazahController.getPermohonanJenazahById)
   .patch(/*auth(),*/ validate(permohonanJenazahValidation.updatePermohonanJenazah), permohonanJenazahController.updatePermohonanJenazah)
-  .put(/*auth(),*/ validate(permohonanJenazahValidation.replacePermohonanJenazah), permohonanJenazahController.replacePermohonanJenazah)
   .delete(/*auth(),*/ validate(permohonanJenazahValidation.deletePermohonanJenazah), permohonanJenazahController.deletePermohonanJenazah);
 
 /**

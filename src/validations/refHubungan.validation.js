@@ -47,23 +47,10 @@ const deleteRefHubungan = {
   }),
 };
 
-const replaceRefHubungan = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    label_ms: Joi.string().max(50).required(),
-    label_en: Joi.string().max(50).required(),
-    is_active: Joi.boolean().required(),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createRefHubungan,
   getRefHubungans,
   getRefHubungan,
-  replaceRefHubungan,
   updateRefHubungan,
   deleteRefHubungan,
 };

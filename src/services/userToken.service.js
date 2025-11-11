@@ -124,26 +124,11 @@ const deleteUserTokensByUser = async (userId) => {
   });
 };
 
-/**
- * Replace user token (PUT)
- */
-const replaceUserTokenById = async (id, replaceData) => {
-  const token = await getUserTokenById(id);
-  if (!token) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'User token not found');
-  }
-  return prisma.user_tokens.update({
-    where: { id },
-    data: replaceData
-  });
-};
-
 module.exports = {
   createUserToken,
   queryUserTokens,
   getUserTokenById,
   getUserTokenBySelector,
-  replaceUserTokenById,
   getUserTokensByUser,
   updateUserTokenById,
   deleteUserTokenById,

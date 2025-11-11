@@ -115,43 +115,8 @@ router
  *     responses:
  *       "200":
  *         description: OK
- *   put:
- *     summary: Replace all menus for a role
- *     tags: [RoleMenu]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: roleId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - menu_ids
- *               - updated_by
- *             properties:
- *               menu_ids:
- *                 type: array
- *                 items:
- *                   type: integer
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
  */
-router
-  .route('/role/:roleId/menus')
-  .get(/*auth(),*/ validate(roleMenuValidation.getMenusByRole), roleMenuController.getMenusByRole)
-  .put(/*auth(),*/ validate(roleMenuValidation.replaceRoleMenus), roleMenuController.replaceRoleMenus);
+router.get('/role/:roleId/menus', /*auth(),*/ validate(roleMenuValidation.getMenusByRole), roleMenuController.getMenusByRole);
 
 /**
  * @swagger

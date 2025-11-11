@@ -175,63 +175,9 @@ router
  *         $ref: '#/components/responses/Forbidden'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace menu
- *     description: Replace menu by ID (full update - all required fields must be provided)
- *     tags: [Menus]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: menuId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - name
- *               - label_ms
- *               - label_en
- *               - url
- *             properties:
- *               parent_id:
- *                 type: integer
- *               name:
- *                 type: string
- *               label_ms:
- *                 type: string
- *               label_en:
- *                 type: string
- *               description:
- *                 type: string
- *               icon_name:
- *                 type: string
- *               icon_color:
- *                 type: string
- *               url:
- *                 type: string
- *               order:
- *                 type: integer
- *               status:
- *                 type: integer
- *                 enum: [0, 1]
- *     responses:
- *       "200":
- *         description: OK
- *       "401":
- *         $ref: '#/components/responses/Unauthorized'
- *       "403":
- *         $ref: '#/components/responses/Forbidden'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
  *     summary: Update menu
- *     description: Update menu by ID (partial update - only provided fields will be updated)
+ *     description: Update menu by ID
  *     tags: [Menus]
  *     security:
  *       - bearerAuth: []
@@ -303,7 +249,6 @@ router
 router
   .route('/:menuId')
   .get(/*auth('viewMenus'),*/ validate(menuValidation.getMenu), menuController.getMenu)
-  .put(/*auth('manageMenus'),*/ validate(menuValidation.putMenu), menuController.putMenu)
   .patch(/*auth('manageMenus'),*/ validate(menuValidation.updateMenu), menuController.updateMenu)
   .delete(/*auth('manageMenus'),*/ validate(menuValidation.deleteMenu), menuController.deleteMenu);
 

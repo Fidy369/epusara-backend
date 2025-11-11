@@ -40,20 +40,10 @@ const removeAllPermissionsFromRole = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-const replaceRolePermissions = catchAsync(async (req, res) => {
-  const result = await rolePermissionService.replaceRolePermissions(
-    parseInt(req.params.roleId), 
-    req.body.permission_ids, 
-    req.body.updated_by
-  );
-  res.send(result);
-});
-
 module.exports = {
   assignPermissionToRole,
   getRolePermissions,
   getPermissionsByRole,
-  replaceRolePermissions,
   getRolesByPermission,
   removePermissionFromRole,
   bulkAssignPermissionsToRole,

@@ -60,24 +60,11 @@ const getByJenisDokumen = {
   }),
 };
 
-const putPermohonanDokumen = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    permohonan_id: Joi.number().integer().required(),
-    jenis_dokumen: Joi.string().max(50).required(),
-    attachment_id: Joi.number().integer().allow(null).default(0),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createPermohonanDokumen,
   getPermohonanDokumen,
   getPermohonanDokumenById,
   updatePermohonanDokumen,
-  putPermohonanDokumen,
   deletePermohonanDokumen,
   getByPermohonanId,
   getByJenisDokumen,

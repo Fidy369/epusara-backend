@@ -48,20 +48,10 @@ const removeAllUsersFromRole = {
   }),
 };
 
-const updateUserRoles = {
-  params: Joi.object().keys({
-    userId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    role_ids: Joi.array().items(Joi.number().integer()).min(1).required(),
-  }),
-};
-
 module.exports = {
   assignRoleToUser,
   queryUserRoleAssignments,
   getRolesByUser,
-  updateUserRoles,
   getUsersByRole,
   removeRoleFromUser,
   removeAllRolesFromUser,

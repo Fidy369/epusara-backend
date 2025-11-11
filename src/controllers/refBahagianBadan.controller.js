@@ -29,12 +29,6 @@ const updateRefBahagianBadan = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-// ADD THIS NEW CONTROLLER FOR PUT
-const replaceRefBahagianBadan = catchAsync(async (req, res) => {
-  const result = await refBahagianBadanService.replaceRefBahagianBadanById(req.params.id, req.body);
-  res.send(result);
-});
-
 const deleteRefBahagianBadan = catchAsync(async (req, res) => {
   await refBahagianBadanService.deleteRefBahagianBadanById(req.params.id);
   res.status(204).send();
@@ -50,6 +44,5 @@ module.exports = {
   getRefBahagianBadans,
   getRefBahagianBadan,
   updateRefBahagianBadan,
-  replaceRefBahagianBadan, // ADD THIS
   deleteRefBahagianBadan,
 };

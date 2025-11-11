@@ -51,11 +51,6 @@ const getActiveTemplates = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replaceEmailTemplate = catchAsync(async (req, res) => {
-  const result = await emailTemplateService.replaceEmailTemplate(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createEmailTemplate,
   getEmailTemplates,
@@ -64,5 +59,4 @@ module.exports = {
   updateEmailTemplate,
   deleteEmailTemplate,
   getActiveTemplates,
-  replaceEmailTemplate,
 };

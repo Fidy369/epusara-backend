@@ -103,25 +103,10 @@ const deleteRefreshTokensByUser = async (userId) => {
   });
 };
 
-/**
- * Replace refresh token by id
- */
-const replaceRefreshTokenById = async (id, updateBody) => {
-  const token = await getRefreshTokenById(id);
-  if (!token) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Refresh token not found');
-  }
-  return prisma.refresh_token.update({
-    where: { id },
-    data: updateBody
-  });
-};
-
 module.exports = {
   createRefreshToken,
   queryRefreshTokens,
   getRefreshTokenById,
-  replaceRefreshTokenById,
   getRefreshTokenByToken,
   getRefreshTokensByUser,
   revokeRefreshToken,

@@ -44,16 +44,10 @@ const getByType = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replacePermohonanNotes = catchAsync(async (req, res) => {
-  const result = await permohonanNotesService.replacePermohonanNotesById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createPermohonanNotes,
   getPermohonanNotes,
   getPermohonanNotesById,
-  replacePermohonanNotes,
   updatePermohonanNotes,
   deletePermohonanNotes,
   getByPermohonanId,

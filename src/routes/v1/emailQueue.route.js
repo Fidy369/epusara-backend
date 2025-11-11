@@ -167,55 +167,8 @@ router
  *               $ref: '#/components/schemas/EmailQueue'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace an email queue entry (full update)
- *     tags: [EmailQueue]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Email queue id
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - recipient
- *               - subject
- *               - body
- *               - status
- *             properties:
- *               recipient:
- *                 type: string
- *                 format: email
- *               subject:
- *                 type: string
- *               body:
- *                 type: string
- *               status:
- *                 type: string
- *                 enum: [pending, sent, failed]
- *               attempts:
- *                 type: integer
- *               last_error:
- *                 type: string
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/EmailQueue'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update an email queue entry (partial update)
+ *     summary: Update an email queue entry
  *     tags: [EmailQueue]
  *     security:
  *       - bearerAuth: []
@@ -273,7 +226,6 @@ router
 router
   .route('/:emailQueueId')
   .get(/*auth(),*/ validate(emailQueueValidation.getEmailQueue), emailQueueController.getEmailQueue)
-  .put(/*auth(),*/ validate(emailQueueValidation.replaceEmailQueue), emailQueueController.replaceEmailQueue)
   .patch(/*auth(),*/ validate(emailQueueValidation.updateEmailQueue), emailQueueController.updateEmailQueue)
   .delete(/*auth(),*/ validate(emailQueueValidation.deleteEmailQueue), emailQueueController.deleteEmailQueue);
 

@@ -3,6 +3,9 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const createRefPaparanPengumuman = async (data) => {
+  if (!prisma.ref_paparan_pengumuman) {
+    throw new Error('ref_paparan_pengumuman table is not available');
+  }
   return prisma.ref_paparan_pengumuman.create({ data });
 };
 
@@ -11,6 +14,16 @@ const getRefPaparanPengumumans = async (filter = {}, options = {}) => {
   const page = parseInt(options.page, 10) || 1;
   const sortBy = options.sortBy || 'created_at:desc';
   const [sortField, sortOrder] = sortBy.split(':');
+
+  // Handle case where Prisma model might be ignored
+  if (!prisma.ref_paparan_pengumuman) {
+    return {
+      results: [],
+      page,
+      limit,
+      totalResults: 0,
+    };
+  }
 
   const [totalResults, results] = await Promise.all([
     prisma.ref_paparan_pengumuman.count({ where: filter }),
@@ -23,18 +36,24 @@ const getRefPaparanPengumumans = async (filter = {}, options = {}) => {
   ]);
 
   return {
-    results,
+    results: results || [],
     page,
     limit,
-    totalResults,
+    totalResults: totalResults || 0,
   };
 };
 
 const getRefPaparanPengumumanById = async (id) => {
+  if (!prisma.ref_paparan_pengumuman) {
+    return null;
+  }
   return prisma.ref_paparan_pengumuman.findUnique({ where: { id: parseInt(id) } });
 };
 
 const updateRefPaparanPengumumanById = async (id, updateBody) => {
+  if (!prisma.ref_paparan_pengumuman) {
+    throw new Error('ref_paparan_pengumuman table is not available');
+  }
   return prisma.ref_paparan_pengumuman.update({
     where: { id: parseInt(id) },
     data: updateBody,
@@ -42,28 +61,15 @@ const updateRefPaparanPengumumanById = async (id, updateBody) => {
 };
 
 const deleteRefPaparanPengumumanById = async (id) => {
-  return prisma.ref_paparan_pengumuman.delete({ where: { id: parseInt(id) } });
-};
-
-const httpStatus = require('http-status').default;
-const ApiError = require('../utils/ApiError');
-
-const replaceRefPaparanPengumumanById = async (id, updateBody) => {
-  const pengumuman = await getRefPaparanPengumumanById(id);
-  if (!pengumuman) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Reference paparan pengumuman not found');
+  if (!prisma.ref_paparan_pengumuman) {
+    throw new Error('ref_paparan_pengumuman table is not available');
   }
-  
-  return prisma.ref_paparan_pengumuman.update({
-    where: { id: parseInt(id) },
-    data: updateBody,
-  });
+  return prisma.ref_paparan_pengumuman.delete({ where: { id: parseInt(id) } });
 };
 
 module.exports = {
   createRefPaparanPengumuman,
   getRefPaparanPengumumans,
-  replaceRefPaparanPengumumanById,
   getRefPaparanPengumumanById,
   updateRefPaparanPengumumanById,
   deleteRefPaparanPengumumanById,

@@ -49,24 +49,10 @@ const deleteRefBangsa = {
   }),
 };
 
-const replaceRefBangsa = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    kod_bangsa: Joi.string().length(4).required(),
-    label_ms: Joi.string().max(50).required(),
-    label_en: Joi.string().max(50).required(),
-    is_active: Joi.boolean().default(false),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createRefBangsa,
   getRefBangsas,
   getRefBangsa,
-  replaceRefBangsa,
   updateRefBangsa,
   deleteRefBangsa,
 };

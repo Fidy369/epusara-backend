@@ -141,53 +141,8 @@ const router = express.Router();
  *               $ref: '#/components/schemas/ZonTapakPerkuburan'
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace a cemetery zone (full update)
- *     tags: [ZonTapakPerkuburan]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Cemetery zone ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - tapak_perkuburan_id
- *             properties:
- *               tapak_perkuburan_id:
- *                 type: integer
- *               nama_zon:
- *                 type: string
- *                 maxLength: 255
- *               ref_kategori_jenazah_kod:
- *                 type: string
- *                 maxLength: 4
- *               ref_kategori_jenazah_id:
- *                 type: integer
- *               keluasan_zon:
- *                 type: number
- *                 format: decimal
- *               kapasiti_lot_keseluruhan:
- *                 type: integer
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ZonTapakPerkuburan'
- *       "404":
- *         description: Not found
  *   patch:
- *     summary: Update a cemetery zone (partial update)
+ *     summary: Update a cemetery zone
  *     tags: [ZonTapakPerkuburan]
  *     parameters:
  *       - in: path
@@ -254,7 +209,6 @@ router
 router
   .route('/:id')
   .get(validate(zonTapakPerkuburanValidation.getZonTapakPerkuburan), zonTapakPerkuburanController.getZonTapakPerkuburan)
-  .put(validate(zonTapakPerkuburanValidation.replaceZonTapakPerkuburan), zonTapakPerkuburanController.replaceZonTapakPerkuburan)
   .patch(validate(zonTapakPerkuburanValidation.updateZonTapakPerkuburan), zonTapakPerkuburanController.updateZonTapakPerkuburan)
   .delete(validate(zonTapakPerkuburanValidation.deleteZonTapakPerkuburan), zonTapakPerkuburanController.deleteZonTapakPerkuburan);
 

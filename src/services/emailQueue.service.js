@@ -70,26 +70,6 @@ const incrementAttempts = async (id) => {
   });
 };
 
-const replaceEmailQueue = async (emailQueueId, updateBody) => {
-  const emailQueue = await getEmailQueueById(emailQueueId);
-  if (!emailQueue) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Email queue not found');
-  }
-  
-  // PUT replaces the entire resource, so we set all fields
-  Object.assign(emailQueue, {
-    recipient: updateBody.recipient,
-    subject: updateBody.subject,
-    body: updateBody.body,
-    status: updateBody.status,
-    attempts: updateBody.attempts || 0,
-    last_error: updateBody.last_error || null,
-  });
-  
-  await emailQueue.save();
-  return emailQueue;
-};
-
 module.exports = {
   createEmailQueue,
   getEmailQueues,
@@ -99,5 +79,4 @@ module.exports = {
   getEmailQueuesByStatus,
   updateEmailQueueStatus,
   incrementAttempts,
-  replaceEmailQueue,
 };

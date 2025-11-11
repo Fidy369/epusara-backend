@@ -6,7 +6,7 @@ const createPertanyaan = {
     name: Joi.string().max(255).required(),
     phone_no: Joi.string().max(50).required(),
     email: Joi.string().email().max(50).required(),
-    kod_kategori_pertanyaan: Joi.string().max(5).required(), // CHANGED from .length(5)
+    kod_kategori_pertanyaan: Joi.string().length(5).required(),
     question: Joi.string().max(1000).required(),
     status: Joi.string().valid('N', 'A').default('N'),
     notes: Joi.string().max(500).allow(null),
@@ -16,7 +16,7 @@ const createPertanyaan = {
 const getPertanyaans = {
   query: Joi.object().keys({
     status: Joi.string().valid('N', 'A'),
-    kod_kategori_pertanyaan: Joi.string().max(5), // CHANGED from .length(5)
+    kod_kategori_pertanyaan: Joi.string().length(5),
     name: Joi.string(),
     email: Joi.string(),
     sortBy: Joi.string(),
@@ -40,28 +40,13 @@ const updatePertanyaan = {
       name: Joi.string().max(255),
       phone_no: Joi.string().max(50),
       email: Joi.string().email().max(50),
-      kod_kategori_pertanyaan: Joi.string().max(5), // CHANGED from .length(5)
+      kod_kategori_pertanyaan: Joi.string().length(5),
       question: Joi.string().max(1000),
       status: Joi.string().valid('N', 'A'),
       notes: Joi.string().max(500).allow(null),
       answered_by: Joi.number().integer().allow(null),
     })
     .min(1),
-};
-
-const replacePertanyaan = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    name: Joi.string().max(255).required(),
-    phone_no: Joi.string().max(50).required(),
-    email: Joi.string().email().max(50).required(),
-    kod_kategori_pertanyaan: Joi.string().max(5).required(), // CHANGED from .length(5)
-    question: Joi.string().max(1000).required(),
-    status: Joi.string().valid('N', 'A').default('N'),
-    notes: Joi.string().max(500).allow(null),
-  }),
 };
 
 const answerPertanyaan = {
@@ -85,7 +70,6 @@ module.exports = {
   getPertanyaans,
   getPertanyaan,
   updatePertanyaan,
-  replacePertanyaan,
   answerPertanyaan,
   deletePertanyaan,
 };

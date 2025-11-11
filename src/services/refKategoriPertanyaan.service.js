@@ -54,22 +54,9 @@ const deleteRefKategoriPertanyaanByKod = async (kod) => {
   return prisma.ref_kategori_pertanyaan.delete({ where: { kod_kategori_pertanyaan: kod } });
 };
 
-const replaceRefKategoriPertanyaanByKod = async (kod, updateBody) => {
-  const kategori = await getRefKategoriPertanyaanByKod(kod);
-  if (!kategori) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Reference kategori pertanyaan not found');
-  }
-  
-  return prisma.ref_kategori_pertanyaan.update({
-    where: { kod_kategori_pertanyaan: kod },
-    data: updateBody,
-  });
-};
-
 module.exports = {
   createRefKategoriPertanyaan,
   getRefKategoriPertanyaans,
-  replaceRefKategoriPertanyaanByKod,
   getRefKategoriPertanyaanByKod,
   updateRefKategoriPertanyaanByKod,
   deleteRefKategoriPertanyaanByKod,

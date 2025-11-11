@@ -101,42 +101,6 @@ router
  *         description: OK
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace running number
- *     tags: [Running Numbers]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: runningNumberId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - type
- *               - date
- *               - running_no
- *             properties:
- *               type:
- *                 type: string
- *                 maxLength: 50
- *               date:
- *                 type: string
- *                 format: date
- *               running_no:
- *                 type: integer
- *                 minimum: 0
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   delete:
  *     summary: Delete running number
  *     tags: [Running Numbers]
@@ -157,7 +121,6 @@ router
 router
   .route('/:runningNumberId')
   .get(auth('getApplications'), validate(permohonanRunningNumberValidation.getRunningNumber), permohonanRunningNumberController.getRunningNumber)
-  .put(auth('manageApplications'), validate(permohonanRunningNumberValidation.replaceRunningNumber), permohonanRunningNumberController.replaceRunningNumber)
   .delete(auth('manageApplications'), validate(permohonanRunningNumberValidation.deleteRunningNumber), permohonanRunningNumberController.deleteRunningNumber);
 
 /**

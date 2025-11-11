@@ -255,52 +255,8 @@ router.get('/uploader/:uploadedBy', /*auth(),*/ validate(attachmentValidation.ge
  *               $ref: '#/components/schemas/Attachment'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace an attachment (full update)
- *     tags: [Attachment]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Attachment id
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - file_name
- *               - mime_type
- *               - extension
- *             properties:
- *               file_name:
- *                 type: string
- *               file_size:
- *                 type: integer
- *               file_path:
- *                 type: string
- *               mime_type:
- *                 type: string
- *               extension:
- *                 type: string
- *               uploaded_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Attachment'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update an attachment (partial update)
+ *     summary: Update an attachment
  *     tags: [Attachment]
  *     security:
  *       - bearerAuth: []
@@ -359,9 +315,8 @@ router.get('/uploader/:uploadedBy', /*auth(),*/ validate(attachmentValidation.ge
  */
 router
   .route('/:attachmentId')
-  .get(auth(), validate(attachmentValidation.getAttachment), attachmentController.getAttachment)
-  .put(auth(), validate(attachmentValidation.replaceAttachment), attachmentController.replaceAttachment)
-  .patch(auth(), validate(attachmentValidation.updateAttachment), attachmentController.updateAttachment)
-  .delete(auth(), validate(attachmentValidation.deleteAttachment), attachmentController.deleteAttachment);
+  .get(auth(), validate(attachmentValidation.getAttachment), attachmentController.getAttachment) // UNCOMMENT: auth(),
+  .patch(auth(), validate(attachmentValidation.updateAttachment), attachmentController.updateAttachment) // UNCOMMENT: auth(),
+  .delete(auth(), validate(attachmentValidation.deleteAttachment), attachmentController.deleteAttachment); // UNCOMMENT: auth(),
 
 module.exports = router;

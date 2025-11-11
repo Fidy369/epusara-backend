@@ -121,43 +121,6 @@ const router = express.Router();
  *               $ref: '#/components/schemas/UserTapakPerkuburan'
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Update user site assignment
- *     tags: [UserTapakPerkuburan]
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: integer
- *         description: User ID
- *       - in: path
- *         name: siteId
- *         required: true
- *         schema:
- *           type: integer
- *         description: Current cemetery site ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - tapak_perkuburan_id
- *             properties:
- *               tapak_perkuburan_id:
- *                 type: integer
- *                 description: New cemetery site ID
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/UserTapakPerkuburan'
- *       "404":
- *         description: Not found
  *   delete:
  *     summary: Remove user from cemetery site
  *     tags: [UserTapakPerkuburan]
@@ -189,7 +152,6 @@ router
 router
   .route('/:userId/:siteId')
   .get(validate(userTapakPerkuburanValidation.getUserSiteAssignment), userTapakPerkuburanController.getUserSiteAssignment)
-  .put(validate(userTapakPerkuburanValidation.updateUserSiteAssignment), userTapakPerkuburanController.updateUserSiteAssignment) // NEW
   .delete(validate(userTapakPerkuburanValidation.removeUserFromSite), userTapakPerkuburanController.removeUserFromSite);
 
 module.exports = router;

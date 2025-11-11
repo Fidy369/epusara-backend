@@ -65,38 +65,11 @@ const getByStatus = async (statusBayaran) => {
   });
 };
 
-const replacePermohonanBayaranById = async (id, replaceBody) => {
-  // First check if the record exists
-  const existingRecord = await prisma.permohonan_bayaran.findUnique({
-    where: { id },
-  });
-  
-  if (!existingRecord) {
-    throw new Error('Permohonan bayaran not found');
-  }
-
-  // Full replacement - sets all fields including nulls
-  return prisma.permohonan_bayaran.update({
-    where: { id },
-    data: {
-      no_akaun: replaceBody.no_akaun,
-      no_bil_pelbagai: replaceBody.no_bil_pelbagai,
-      no_resit: replaceBody.no_resit,
-      permohonan_id: replaceBody.permohonan_id,
-      payment_deadline: replaceBody.payment_deadline,
-      status_bayaran: replaceBody.status_bayaran,
-      updated_by: replaceBody.updated_by,
-      updated_at: new Date(),
-    },
-  });
-};
-
 module.exports = {
   createPermohonanBayaran,
   getPermohonanBayaran,
   getPermohonanBayaranById,
   updatePermohonanBayaranById,
-  replacePermohonanBayaranById,
   deletePermohonanBayaranById,
   getByPermohonanId,
   getByStatus,

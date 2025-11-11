@@ -49,22 +49,9 @@ const deleteRefNegara = {
   }),
 };
 
-const replaceRefNegara = {
-  params: Joi.object().keys({
-    kod: Joi.string().length(2).required(),
-  }),
-  body: Joi.object().keys({
-    label_ms: Joi.string().max(150).required(),
-    label_en: Joi.string().max(150).required(),
-    is_active: Joi.boolean().default(false),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createRefNegara,
   getRefNegaras,
-  replaceRefNegara,
   getRefNegara,
   updateRefNegara,
   deleteRefNegara,

@@ -115,43 +115,8 @@ router
  *     responses:
  *       "200":
  *         description: OK
- *   put:
- *     summary: Replace all permissions for a role
- *     tags: [RolePermission]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: roleId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - permission_ids
- *               - updated_by
- *             properties:
- *               permission_ids:
- *                 type: array
- *                 items:
- *                   type: integer
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
  */
-router
-  .route('/role/:roleId/permissions')
-  .get(/*auth(),*/ validate(rolePermissionValidation.getPermissionsByRole), rolePermissionController.getPermissionsByRole)
-  .put(/*auth(),*/ validate(rolePermissionValidation.replaceRolePermissions), rolePermissionController.replaceRolePermissions);
+router.get('/role/:roleId/permissions', /*auth(),*/ validate(rolePermissionValidation.getPermissionsByRole), rolePermissionController.getPermissionsByRole);
 
 /**
  * @swagger

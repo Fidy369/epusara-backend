@@ -44,16 +44,10 @@ const getByHubungan = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replacePermohonanPemohon = catchAsync(async (req, res) => {
-  const result = await permohonanPemohonService.replacePermohonanPemohonById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createPermohonanPemohon,
   getPermohonanPemohon,
   getPermohonanPemohonById,
-  replacePermohonanPemohon,
   updatePermohonanPemohon,
   deletePermohonanPemohon,
   getByPermohonanId,

@@ -152,46 +152,8 @@ router
  *               $ref: '#/components/schemas/AuditEvent'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace audit event (full update)
- *     tags: [AuditEvent]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Audit event ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - event
- *             properties:
- *               user_id:
- *                 type: integer
- *               ip_address:
- *                 type: string
- *               event:
- *                 type: string
- *               description:
- *                 type: string
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/AuditEvent'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update audit event (partial update)
+ *     summary: Update audit event
  *     tags: [AuditEvent]
  *     security:
  *       - bearerAuth: []
@@ -247,7 +209,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(auditEventValidation.getAuditEventById), auditEventController.getAuditEventById)
-  .put(/*auth(),*/ validate(auditEventValidation.replaceAuditEvent), auditEventController.replaceAuditEvent)
   .patch(/*auth(),*/ validate(auditEventValidation.updateAuditEvent), auditEventController.updateAuditEvent)
   .delete(/*auth(),*/ validate(auditEventValidation.deleteAuditEvent), auditEventController.deleteAuditEvent);
 

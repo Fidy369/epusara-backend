@@ -73,9 +73,11 @@ const updateUserProfileById = async (id, updateData) => {
   if (!profile) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User profile not found');
   }
+  // Remove fields that don't exist in the schema
+  const { poskod, ...validData } = updateData;
   return prisma.user_profile.update({
     where: { id },
-    data: updateData
+    data: validData
   });
 };
 
@@ -90,24 +92,9 @@ const deleteUserProfileById = async (id) => {
   return prisma.user_profile.delete({ where: { id } });
 };
 
-/**
- * Replace user profile (full update)
- */
-const replaceUserProfileById = async (id, replaceData) => {
-  const profile = await getUserProfileById(id);
-  if (!profile) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'User profile not found');
-  }
-  return prisma.user_profile.update({
-    where: { id },
-    data: replaceData
-  });
-};
-
 module.exports = {
   createUserProfile,
   queryUserProfiles,
-  replaceUserProfileById,
   getUserProfileById,
   getUserProfileByUserId,
   updateUserProfileById,

@@ -74,30 +74,11 @@ const getUserMenu = {
   query: Joi.object().keys({}),
 };
 
-const putMenu = {
-  params: Joi.object().keys({
-    menuId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    parent_id: Joi.number().integer(),
-    name: Joi.string().required(),
-    label_ms: Joi.string().required(),
-    label_en: Joi.string().required(),
-    description: Joi.string(),
-    icon_name: Joi.string(),
-    icon_color: Joi.string(),
-    url: Joi.string().required(),
-    order: Joi.number().integer().default(0),
-    status: Joi.number().integer().valid(0, 1).default(1),
-  }),
-};
-
 module.exports = {
   createMenu,
   queryMenus,
   getMenu,
   updateMenu,
-  putMenu,
   deleteMenu,
   assignMenuToRole,
   removeMenuFromRole,

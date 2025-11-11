@@ -41,24 +41,11 @@ const deletePasswordResetsByUser = {
   }),
 };
 
-const updatePasswordReset = {
-  params: Joi.object().keys({
-    resetId: Joi.number().integer().required(),
-  }),
-  body: Joi.object()
-    .keys({
-      password: Joi.string(),
-      created_by: Joi.number().integer(),
-    })
-    .min(1), // At least one field must be provided
-};
-
 module.exports = {
   createPasswordReset,
   queryPasswordResets,
   getPasswordReset,
   getPasswordResetByUser,
-  updatePasswordReset,
   deletePasswordReset,
   deletePasswordResetsByUser,
 };

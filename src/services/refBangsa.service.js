@@ -53,24 +53,10 @@ const getActiveRefBangsa = async () => {
   });
 };
 
-const replaceRefBangsaById = async (id, replaceBody) => {
-  const refBangsa = await getRefBangsaById(id);
-  if (!refBangsa) {
-    throw new Error('Reference bangsa not found');
-  }
-  
-  return prisma.ref_bangsa.update({
-    where: { id: parseInt(id) },
-    data: replaceBody,
-  });
-};
-
 module.exports = {
   createRefBangsa,
   getRefBangsas,
   getRefBangsaById,
-  getActiveRefBangsa,
-  replaceRefBangsaById,
   updateRefBangsaById,
   deleteRefBangsaById,
 };

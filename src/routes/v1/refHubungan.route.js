@@ -100,7 +100,7 @@ router
  *       "404":
  *         description: Not found
  *   patch:
- *     summary: Update relationship reference (partial update)
+ *     summary: Update relationship reference
  *     tags: [RefHubungan]
  *     parameters:
  *       - in: path
@@ -115,40 +115,6 @@ router
  *         application/json:
  *           schema:
  *             type: object
- *             properties:
- *               label_ms:
- *                 type: string
- *                 maxLength: 50
- *               label_en:
- *                 type: string
- *                 maxLength: 50
- *               is_active:
- *                 type: boolean
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
- *   put:
- *     summary: Replace relationship reference (full update)
- *     tags: [RefHubungan]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Relationship ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - label_ms
- *               - label_en
- *               - is_active
  *             properties:
  *               label_ms:
  *                 type: string
@@ -183,7 +149,6 @@ router
   .route('/:id')
   .get(/*auth(),*/ validate(refHubunganValidation.getRefHubungan), refHubunganController.getRefHubungan)
   .patch(/*auth(),*/ validate(refHubunganValidation.updateRefHubungan), refHubunganController.updateRefHubungan)
-  .put(/*auth(),*/ validate(refHubunganValidation.replaceRefHubungan), refHubunganController.replaceRefHubungan)
   .delete(/*auth(),*/ validate(refHubunganValidation.deleteRefHubungan), refHubunganController.deleteRefHubungan);
 
 module.exports = router;

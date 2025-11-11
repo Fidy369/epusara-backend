@@ -53,23 +53,10 @@ const getActiveRefHubungan = async () => {
   });
 };
 
-const replaceRefHubunganById = async (id, replaceBody) => {
-  const refHubungan = await getRefHubunganById(id);
-  if (!refHubungan) {
-    throw new Error('Reference hubungan not found');
-  }
-  return prisma.ref_hubungan.update({
-    where: { id: parseInt(id) },
-    data: replaceBody,
-  });
-};
-
 module.exports = {
   createRefHubungan,
   getRefHubungans,
   getRefHubunganById,
-  getActiveRefHubungan,
-  replaceRefHubunganById,
   updateRefHubunganById,
   deleteRefHubunganById,
 };

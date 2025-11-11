@@ -59,24 +59,11 @@ const getByType = {
   }),
 };
 
-const replacePermohonanNotes = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    permohonan_id: Joi.number().integer().required(),
-    type: Joi.string().max(50).required(),
-    notes: Joi.string().max(500).required(),
-    updated_by: Joi.number().integer().required(),
-  }),
-};
-
 module.exports = {
   createPermohonanNotes,
   getPermohonanNotes,
   getPermohonanNotesById,
   updatePermohonanNotes,
-  replacePermohonanNotes,
   deletePermohonanNotes,
   getByPermohonanId,
   getByType,

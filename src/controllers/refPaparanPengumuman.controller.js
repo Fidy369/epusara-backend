@@ -33,15 +33,9 @@ const deleteRefPaparanPengumuman = catchAsync(async (req, res) => {
   res.status(204).send();
 });
 
-const replaceRefPaparanPengumuman = catchAsync(async (req, res) => {
-  const result = await refPaparanPengumumanService.replaceRefPaparanPengumumanById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createRefPaparanPengumuman,
   getRefPaparanPengumumans,
-  replaceRefPaparanPengumuman,
   getRefPaparanPengumuman,
   updateRefPaparanPengumuman,
   deleteRefPaparanPengumuman,

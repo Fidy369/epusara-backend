@@ -192,54 +192,6 @@ const router = express.Router();
  *               $ref: '#/components/schemas/RefPaparanPengumuman'
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace a reference announcement display (full update)
- *     tags: [RefPaparanPengumuman]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Announcement display ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - content_ms
- *               - content_en
- *               - is_active
- *               - desktop_url
- *               - thumnail_url
- *               - mobile_url
- *             properties:
- *               content_ms:
- *                 type: string
- *               content_en:
- *                 type: string
- *               is_active:
- *                 type: boolean
- *               desktop_url:
- *                 type: string
- *                 maxLength: 255
- *               thumnail_url:
- *                 type: string
- *                 maxLength: 255
- *               mobile_url:
- *                 type: string
- *                 maxLength: 255
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/RefPaparanPengumuman'
- *       "404":
- *         description: Not found
  *   delete:
  *     summary: Delete a reference announcement display
  *     tags: [RefPaparanPengumuman]
@@ -266,7 +218,6 @@ router
   .route('/:id')
   .get(validate(refPaparanPengumumanValidation.getRefPaparanPengumuman), refPaparanPengumumanController.getRefPaparanPengumuman)
   .patch(validate(refPaparanPengumumanValidation.updateRefPaparanPengumuman), refPaparanPengumumanController.updateRefPaparanPengumuman)
-  .put(validate(refPaparanPengumumanValidation.replaceRefPaparanPengumuman), refPaparanPengumumanController.replaceRefPaparanPengumuman)
   .delete(validate(refPaparanPengumumanValidation.deleteRefPaparanPengumuman), refPaparanPengumumanController.deleteRefPaparanPengumuman);
 
 module.exports = router;

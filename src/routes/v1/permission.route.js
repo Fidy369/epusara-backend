@@ -14,7 +14,6 @@ router
   .route('/:permissionId')
   .get(validate(permissionValidation.getPermission), permissionController.getPermission)
   .patch(validate(permissionValidation.updatePermission), permissionController.updatePermission)
-  .put(validate(permissionValidation.putPermission), permissionController.putPermission)
   .delete(validate(permissionValidation.deletePermission), permissionController.deletePermission);
 
 // Role-Permission assignment routes
@@ -113,7 +112,7 @@ module.exports = router;
  *         description: Not found
  *
  *   patch:
- *     summary: Update a permission (partial update)
+ *     summary: Update a permission
  *     tags: [Permissions]
  *     parameters:
  *       - in: path
@@ -139,41 +138,6 @@ module.exports = router;
  *     responses:
  *       "200":
  *         description: OK
- *       "404":
- *         description: Not found
- *
- *   put:
- *     summary: Replace a permission (full update)
- *     tags: [Permissions]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Permission id
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - name
- *               - description
- *             properties:
- *               name:
- *                 type: string
- *               description:
- *                 type: string
- *             example:
- *               name: manageApplications
- *               description: Can manage all burial applications
- *     responses:
- *       "200":
- *         description: OK
- *       "400":
- *         description: Bad Request
  *       "404":
  *         description: Not found
  *

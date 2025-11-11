@@ -29,11 +29,6 @@ const updateAuditEvent = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replaceAuditEvent = catchAsync(async (req, res) => {
-  const result = await auditEventService.replaceAuditEventById(req.params.id, req.body);
-  res.send(result);
-});
-
 const deleteAuditEvent = catchAsync(async (req, res) => {
   await auditEventService.deleteAuditEventById(req.params.id);
   res.status(httpStatus.NO_CONTENT).send();
@@ -54,7 +49,6 @@ module.exports = {
   getAuditEvents,
   getAuditEventById,
   updateAuditEvent,
-  replaceAuditEvent,
   deleteAuditEvent,
   getByUserId,
   getByEvent,

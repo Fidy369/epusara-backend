@@ -46,20 +46,11 @@ const cleanExpiredHistory = catchAsync(async (req, res) => {
   res.send({ deleted_count: result.count });
 });
 
-const updatePasswordHistory = catchAsync(async (req, res) => {
-  const history = await passwordHistoryService.updatePasswordHistoryById(
-    parseInt(req.params.historyId),
-    req.body
-  );
-  res.send(history);
-});
-
 module.exports = {
   createPasswordHistory,
   queryPasswordHistory,
   getPasswordHistory,
   getPasswordHistoryByUser,
-  updatePasswordHistory,
   deletePasswordHistory,
   cleanExpiredHistory,
 };

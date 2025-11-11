@@ -219,77 +219,8 @@ router
  *               $ref: '#/components/schemas/PermohonanPemohon'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace application applicant (full update)
- *     tags: [PermohonanPemohon]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Applicant ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - permohonan_id
- *               - nama_pemohon
- *               - jenis_pengenalan
- *               - no_pengenalan
- *               - ref_hubungan_id
- *               - is_waris
- *               - phone
- *               - email
- *               - address1
- *               - poskod
- *               - updated_by
- *             properties:
- *               permohonan_id:
- *                 type: integer
- *               nama_pemohon:
- *                 type: string
- *               jenis_pengenalan:
- *                 type: string
- *               no_pengenalan:
- *                 type: string
- *               ref_hubungan_id:
- *                 type: integer
- *               hubungan_lain:
- *                 type: string
- *               is_waris:
- *                 type: boolean
- *               phone:
- *                 type: string
- *               email:
- *                 type: string
- *                 format: email
- *               address1:
- *                 type: string
- *               address2:
- *                 type: string
- *               address3:
- *                 type: string
- *               poskod:
- *                 type: string
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/PermohonanPemohon'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update application applicant (partial update)
+ *     summary: Update application applicant
  *     tags: [PermohonanPemohon]
  *     security:
  *       - bearerAuth: []
@@ -366,7 +297,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(permohonanPemohonValidation.getPermohonanPemohonById), permohonanPemohonController.getPermohonanPemohonById)
-  .put(/*auth(),*/ validate(permohonanPemohonValidation.replacePermohonanPemohon), permohonanPemohonController.replacePermohonanPemohon)
   .patch(/*auth(),*/ validate(permohonanPemohonValidation.updatePermohonanPemohon), permohonanPemohonController.updatePermohonanPemohon)
   .delete(/*auth(),*/ validate(permohonanPemohonValidation.deletePermohonanPemohon), permohonanPemohonController.deletePermohonanPemohon);
 

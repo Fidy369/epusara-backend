@@ -152,48 +152,8 @@ router
  *               $ref: '#/components/schemas/AuditLog'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace audit log (full update)
- *     tags: [AuditLog]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Audit log ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - event_id
- *               - object_type
- *               - object_id
- *             properties:
- *               event_id:
- *                 type: integer
- *               object_type:
- *                 type: string
- *               object_id:
- *                 type: string
- *               changed_data:
- *                 type: object
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/AuditLog'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update audit log (partial update)
+ *     summary: Update audit log
  *     tags: [AuditLog]
  *     security:
  *       - bearerAuth: []
@@ -249,7 +209,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(auditLogValidation.getAuditLogById), auditLogController.getAuditLogById)
-  .put(/*auth(),*/ validate(auditLogValidation.replaceAuditLog), auditLogController.replaceAuditLog)
   .patch(/*auth(),*/ validate(auditLogValidation.updateAuditLog), auditLogController.updateAuditLog)
   .delete(/*auth(),*/ validate(auditLogValidation.deleteAuditLog), auditLogController.deleteAuditLog);
 

@@ -54,22 +54,9 @@ const deleteRefNegaraByKod = async (kod) => {
   return prisma.ref_negara.delete({ where: { kod_negara: kod } });
 };
 
-const replaceRefNegaraByKod = async (kod, updateBody) => {
-  const negara = await getRefNegaraByKod(kod);
-  if (!negara) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Reference negara not found');
-  }
-  
-  return prisma.ref_negara.update({
-    where: { kod_negara: kod },
-    data: updateBody,
-  });
-};
-
 module.exports = {
   createRefNegara,
   getRefNegaras,
-  replaceRefNegaraByKod,
   getRefNegaraByKod,
   updateRefNegaraByKod,
   deleteRefNegaraByKod,

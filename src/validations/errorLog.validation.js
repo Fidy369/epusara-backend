@@ -52,26 +52,6 @@ const getErrorStatistics = {
   }),
 };
 
-const updateErrorLog = {
-  params: Joi.object().keys({
-    errorId: Joi.number().integer().required(),
-  }),
-  body: Joi.object()
-    .keys({
-      type: Joi.string().max(50),
-      message: Joi.string(),
-      file: Joi.string().max(255).allow(null),
-      line: Joi.number().integer().allow(null),
-      trace: Joi.string().allow(null),
-      context: Joi.string().max(255).allow(null),
-      user_id: Joi.number().integer().allow(null),
-      ip_address: Joi.string().max(45).allow(null),
-      method: Joi.string().max(10).allow(null),
-      url: Joi.string().max(255).allow(null),
-    })
-    .min(1), // At least one field must be provided
-};
-
 module.exports = {
   createErrorLog,
   queryErrorLogs,
@@ -79,5 +59,4 @@ module.exports = {
   deleteErrorLog,
   clearOldErrorLogs,
   getErrorStatistics,
-  updateErrorLog,
 };

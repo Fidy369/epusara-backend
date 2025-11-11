@@ -47,18 +47,10 @@ const getActiveTemplates = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replaceRefEmailTemplate = catchAsync(async (req, res) => {
-  const result = await refEmailTemplateService.replaceRefEmailTemplateById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createRefEmailTemplate,
   getRefEmailTemplates,
   getRefEmailTemplate,
-  getRefEmailTemplateByKod,
-  getActiveTemplates,
-  replaceRefEmailTemplate,
   updateRefEmailTemplate,
   deleteRefEmailTemplate,
 };

@@ -33,15 +33,9 @@ const deleteTapakPerkuburan = catchAsync(async (req, res) => {
   res.status(204).send();
 });
 
-const replaceTapakPerkuburan = catchAsync(async (req, res) => {
-  const result = await tapakPerkuburanService.replaceTapakPerkuburanById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createTapakPerkuburan,
   getTapakPerkuburans,
-  replaceTapakPerkuburan,
   getTapakPerkuburan,
   updateTapakPerkuburan,
   deleteTapakPerkuburan,

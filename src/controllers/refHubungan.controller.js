@@ -39,17 +39,10 @@ const getActiveRefHubungan = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replaceRefHubungan = catchAsync(async (req, res) => {
-  const result = await refHubunganService.replaceRefHubunganById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createRefHubungan,
   getRefHubungans,
   getRefHubungan,
-  getActiveRefHubungan,
-  replaceRefHubungan,
   updateRefHubungan,
   deleteRefHubungan,
 };

@@ -50,19 +50,10 @@ const removePermissionFromRole = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-const putPermission = catchAsync(async (req, res) => {
-  const permission = await permissionService.replacePermissionById(
-    parseInt(req.params.permissionId), 
-    req.body
-  );
-  res.send(permission);
-});
-
 module.exports = {
   createPermission,
   getPermissions,
   getPermission,
-  putPermission,
   updatePermission,
   deletePermission,
   assignPermissionToRole,

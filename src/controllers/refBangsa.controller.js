@@ -39,17 +39,10 @@ const getActiveRefBangsa = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replaceRefBangsa = catchAsync(async (req, res) => {
-  const result = await refBangsaService.replaceRefBangsaById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createRefBangsa,
   getRefBangsas,
   getRefBangsa,
-  getActiveRefBangsa,
-  replaceRefBangsa,
   updateRefBangsa,
   deleteRefBangsa,
 };

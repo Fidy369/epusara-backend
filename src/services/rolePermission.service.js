@@ -75,39 +75,10 @@ const removeAllPermissionsFromRole = async (roleId) => {
   });
 };
 
-const replaceRolePermissions = async (roleId, permissionIds, updatedBy = 0) => {
-  // Use transaction to ensure atomicity
-  return prisma.$transaction(async (tx) => {
-    // First, delete all existing permission assignments for this role
-    await tx.role_permission.deleteMany({
-      where: { role_id: roleId },
-    });
-
-    // Then, create new assignments
-    const assignments = permissionIds.map(permissionId => ({
-      role_id: roleId,
-      permission_id: permissionId,
-      created_by: updatedBy,
-      updated_by: updatedBy,
-    }));
-
-    await tx.role_permission.createMany({
-      data: assignments,
-    });
-
-    // Return the new assignments
-    return tx.role_permission.findMany({
-      where: { role_id: roleId },
-      include: { permission: true },
-    });
-  });
-};
-
 module.exports = {
   assignPermissionToRole,
   getRolePermissions,
   getPermissionsByRole,
-  replaceRolePermissions,
   getRolesByPermission,
   removePermissionFromRole,
   bulkAssignPermissionsToRole,

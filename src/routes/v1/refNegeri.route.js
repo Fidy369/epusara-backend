@@ -162,40 +162,6 @@ const router = express.Router();
  *               $ref: '#/components/schemas/RefNegeri'
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace a reference state (full update)
- *     tags: [RefNegeri]
- *     parameters:
- *       - in: path
- *         name: kod
- *         required: true
- *         schema:
- *           type: string
- *         description: State code
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - label
- *             properties:
- *               label:
- *                 type: string
- *                 maxLength: 50
- *               is_active:
- *                 type: boolean
- *                 default: false
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/RefNegeri'
- *       "404":
- *         description: Not found
  *   delete:
  *     summary: Delete a reference state
  *     tags: [RefNegeri]
@@ -222,7 +188,6 @@ router
   .route('/:kod')
   .get(validate(refNegeriValidation.getRefNegeri), refNegeriController.getRefNegeri)
   .patch(validate(refNegeriValidation.updateRefNegeri), refNegeriController.updateRefNegeri)
-  .put(validate(refNegeriValidation.replaceRefNegeri), refNegeriController.replaceRefNegeri)
   .delete(validate(refNegeriValidation.deleteRefNegeri), refNegeriController.deleteRefNegeri);
 
 module.exports = router;

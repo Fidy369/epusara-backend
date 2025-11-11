@@ -60,23 +60,11 @@ const deleteUserTokensByUser = {
   }),
 };
 
-const replaceUserToken = {
-  params: Joi.object().keys({
-    tokenId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    selector: Joi.string().length(12).required(),
-    hashed_validator: Joi.string().length(64).required(),
-    expires: Joi.date().required(),
-  }),
-};
-
 module.exports = {
   createUserToken,
   queryUserTokens,
   getUserToken,
   getUserTokenBySelector,
-  replaceUserToken,
   getUserTokensByUser,
   updateUserToken,
   deleteUserToken,

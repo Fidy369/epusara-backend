@@ -33,16 +33,10 @@ const deleteZonTapakPerkuburan = catchAsync(async (req, res) => {
   res.status(204).send();
 });
 
-const replaceZonTapakPerkuburan = catchAsync(async (req, res) => {
-  const result = await zonTapakPerkuburanService.replaceZonTapakPerkuburanById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createZonTapakPerkuburan,
   getZonTapakPerkuburans,
   getZonTapakPerkuburan,
-  replaceZonTapakPerkuburan,
   updateZonTapakPerkuburan,
   deleteZonTapakPerkuburan,
 };

@@ -54,22 +54,10 @@ const deleteRunningNumber = {
   }),
 };
 
-const replaceRunningNumber = {
-  params: Joi.object().keys({
-    runningNumberId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    type: Joi.string().max(50).required(),
-    date: Joi.date().required(),
-    running_no: Joi.number().integer().min(0).required(),
-  }),
-};
-
 module.exports = {
   createRunningNumber,
   queryRunningNumbers,
   getRunningNumber,
-  replaceRunningNumber,
   getNextRunningNumber,
   incrementRunningNumber,
   resetRunningNumber,

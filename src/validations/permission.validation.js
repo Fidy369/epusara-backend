@@ -57,23 +57,11 @@ const removePermissionFromRole = {
   }),
 };
 
-const putPermission = {
-  params: Joi.object().keys({
-    permissionId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    name: Joi.string().max(150).required(),
-    description: Joi.string().max(255).required(),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createPermission,
   getPermissions,
   getPermission,
   updatePermission,
-  putPermission,
   deletePermission,
   assignPermissionToRole,
   removePermissionFromRole,

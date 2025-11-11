@@ -31,21 +31,9 @@ const removeUserFromSite = {
   }),
 };
 
-// NEW: Update validation
-const updateUserSiteAssignment = {
-  params: Joi.object().keys({
-    userId: Joi.number().integer().required(),
-    siteId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    tapak_perkuburan_id: Joi.number().integer().required(),
-  }).min(1),
-};
-
 module.exports = {
   assignUserToSite,
   getUserSiteAssignments,
-  updateUserSiteAssignment,
   getUserSiteAssignment,
   removeUserFromSite,
 };

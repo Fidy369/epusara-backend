@@ -36,23 +36,6 @@ const getRefJenisHaiwanByKod = {
   }),
 };
 
-const getActiveRefJenisHaiwan = {
-  query: Joi.object().keys({}),
-};
-
-const replaceRefJenisHaiwan = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    kod_jenis_haiwan: Joi.string().length(4).required(),
-    label_ms: Joi.string().max(50).required(),
-    label_en: Joi.string().max(50).required(),
-    is_active: Joi.number().integer().valid(0, 1).required(),
-    updated_by: Joi.number().integer(),
-  }),
-};
-
 const updateRefJenisHaiwan = {
   params: Joi.object().keys({
     id: Joi.number().integer().required(),
@@ -78,9 +61,6 @@ module.exports = {
   createRefJenisHaiwan,
   getRefJenisHaiwans,
   getRefJenisHaiwan,
-  getRefJenisHaiwanByKod,
-  getActiveRefJenisHaiwan,
-  replaceRefJenisHaiwan,
   updateRefJenisHaiwan,
   deleteRefJenisHaiwan,
 };

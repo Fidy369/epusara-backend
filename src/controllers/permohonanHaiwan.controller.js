@@ -44,17 +44,11 @@ const getByJenisHaiwan = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replacePermohonanHaiwan = catchAsync(async (req, res) => {
-  const result = await permohonanHaiwanService.putPermohonanHaiwanById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createPermohonanHaiwan,
   getPermohonanHaiwan,
   getPermohonanHaiwanById,
   updatePermohonanHaiwan,
-  replacePermohonanHaiwan,
   deletePermohonanHaiwan,
   getByPermohonanId,
   getByJenisHaiwan,

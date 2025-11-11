@@ -91,24 +91,10 @@ const deletePostalCodeById = async (id) => {
   return prisma.ref_poskod.delete({ where: { id } });
 };
 
-const replacePostalCodeById = async (id, updateBody) => {
-  const postalCode = await getPostalCodeById(id);
-  if (!postalCode) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Postal code not found');
-  }
-
-  return prisma.ref_poskod.update({
-    where: { id },
-    data: updateBody,
-    include: { ref_negeri: true }
-  });
-};
-
 module.exports = {
   createPostalCode,
   queryPostalCodes,
   getPostalCodeById,
-  replacePostalCodeById,
   getPostalCodeByCode,
   getActivePostalCodes,
   getPostalCodesByState,

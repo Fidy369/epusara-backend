@@ -66,23 +66,10 @@ const getByType = async (type) => {
   });
 };
 
-const replacePermohonanNotesById = async (id, updateBody) => {
-  const note = await getPermohonanNotesById(id);
-  if (!note) {
-    throw new Error('Permohonan notes not found');
-  }
-  
-  return prisma.permohonan_notes.update({
-    where: { id },
-    data: updateBody,
-  });
-};
-
 module.exports = {
   createPermohonanNotes,
   getPermohonanNotes,
   getPermohonanNotesById,
-  replacePermohonanNotesById,
   updatePermohonanNotesById,
   deletePermohonanNotesById,
   getByPermohonanId,

@@ -123,7 +123,6 @@ const queryMenus = async (filter = {}, options = {}) => {
     page,
     limit,
     totalResults,
-    totalPages: Math.ceil(totalResults / limit),
   };
 };
 
@@ -143,7 +142,7 @@ const getMenuById = async (id) => {
 };
 
 /**
- * Update menu by id (partial update - PATCH)
+ * Update menu by id
  * @param {number} menuId
  * @param {Object} updateData
  * @returns {Promise<Menu>}
@@ -156,33 +155,7 @@ const updateMenuById = async (menuId, updateData) => {
 
   return prisma.menu.update({
     where: { id: menuId },
-    data: updateData,
-    include: {
-      menu: true,
-      other_menu: true
-    }
-  });
-};
-
-/**
- * Replace menu by id (full update - PUT)
- * @param {number} menuId
- * @param {Object} menuData
- * @returns {Promise<Menu>}
- */
-const putMenuById = async (menuId, menuData) => {
-  const menu = await getMenuById(menuId);
-  if (!menu) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Menu not found');
-  }
-
-  return prisma.menu.update({
-    where: { id: menuId },
-    data: menuData,
-    include: {
-      menu: true,
-      other_menu: true
-    }
+    data: updateData
   });
 };
 
@@ -262,7 +235,6 @@ module.exports = {
   queryMenus,
   getMenuById,
   updateMenuById,
-  putMenuById,  // Added PUT function
   deleteMenuById,
   assignMenuToRole,
   removeMenuFromRole,

@@ -65,26 +65,10 @@ const getByJenisHaiwan = async (refJenisHaiwanKod) => {
   });
 };
 
-const replacePermohonanHaiwanById = async (id, updateBody) => {
-  const permohonanHaiwan = await prisma.permohonan_haiwan.findUnique({
-    where: { id },
-  });
-  
-  if (!permohonanHaiwan) {
-    throw new Error('Permohonan haiwan not found');
-  }
-  
-  return prisma.permohonan_haiwan.update({
-    where: { id },
-    data: updateBody,
-  });
-};
-
 module.exports = {
   createPermohonanHaiwan,
   getPermohonanHaiwan,
   getPermohonanHaiwanById,
-  replacePermohonanHaiwanById,
   updatePermohonanHaiwanById,
   deletePermohonanHaiwanById,
   getByPermohonanId,

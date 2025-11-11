@@ -52,18 +52,6 @@ const deleteEmailTemplate = {
   }),
 };
 
-const replaceEmailTemplate = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    key: Joi.string().max(50).required(),
-    description: Joi.string().max(255).allow(null),
-    title: Joi.string().max(255).required(),
-    content: Joi.string().max(5000).required(),
-  }),
-};
-
 module.exports = {
   createEmailTemplate,
   getEmailTemplates,
@@ -71,5 +59,4 @@ module.exports = {
   getEmailTemplateByKey,
   updateEmailTemplate,
   deleteEmailTemplate,
-  replaceEmailTemplate,
 };

@@ -25,13 +25,6 @@ const getPertanyaanFaqs = async (filter = {}, options = {}) => {
   const sortBy = options.sortBy || 'created_at:desc';
   const [sortField, sortOrder] = sortBy.split(':');
 
-  // Convert is_active from string to boolean if it exists
-  if (filter.is_active !== undefined) {
-    if (typeof filter.is_active === 'string') {
-      filter.is_active = filter.is_active === 'true';
-    }
-  }
-
   const [totalResults, results] = await Promise.all([
     prisma.pertanyaan_faq.count({ where: filter }),
     prisma.pertanyaan_faq.findMany({
@@ -47,13 +40,12 @@ const getPertanyaanFaqs = async (filter = {}, options = {}) => {
     page,
     limit,
     totalResults,
-    totalPages: Math.ceil(totalResults / limit),
   };
 };
 
 /**
  * Get pertanyaan_faq by id
- * @param {number} id
+ * @param {ObjectId} id
  * @returns {Promise<PertanyaanFaq>}
  */
 const getPertanyaanFaqById = async (id) => {
@@ -62,7 +54,7 @@ const getPertanyaanFaqById = async (id) => {
 
 /**
  * Update pertanyaan_faq by id
- * @param {number} pertanyaanFaqId
+ * @param {ObjectId} pertanyaanFaqId
  * @param {Object} updateBody
  * @returns {Promise<PertanyaanFaq>}
  */
@@ -71,10 +63,6 @@ const updatePertanyaanFaqById = async (pertanyaanFaqId, updateBody) => {
   if (!pertanyaanFaq) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Pertanyaan FAQ not found');
   }
-  
-  // Update the updated_at timestamp
-  updateBody.updated_at = new Date();
-  
   return prisma.pertanyaan_faq.update({
     where: { id: parseInt(pertanyaanFaqId) },
     data: updateBody,
@@ -82,29 +70,8 @@ const updatePertanyaanFaqById = async (pertanyaanFaqId, updateBody) => {
 };
 
 /**
- * Replace pertanyaan_faq by id (PUT - full replacement)
- * @param {number} pertanyaanFaqId
- * @param {Object} replaceBody
- * @returns {Promise<PertanyaanFaq>}
- */
-const replacePertanyaanFaqById = async (pertanyaanFaqId, replaceBody) => {
-  const pertanyaanFaq = await getPertanyaanFaqById(pertanyaanFaqId);
-  if (!pertanyaanFaq) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Pertanyaan FAQ not found');
-  }
-  
-  // Update the updated_at timestamp
-  replaceBody.updated_at = new Date();
-  
-  return prisma.pertanyaan_faq.update({
-    where: { id: parseInt(pertanyaanFaqId) },
-    data: replaceBody,
-  });
-};
-
-/**
  * Delete pertanyaan_faq by id
- * @param {number} pertanyaanFaqId
+ * @param {ObjectId} pertanyaanFaqId
  * @returns {Promise<PertanyaanFaq>}
  */
 const deletePertanyaanFaqById = async (pertanyaanFaqId) => {
@@ -120,6 +87,5 @@ module.exports = {
   getPertanyaanFaqs,
   getPertanyaanFaqById,
   updatePertanyaanFaqById,
-  replacePertanyaanFaqById,
   deletePertanyaanFaqById,
 };

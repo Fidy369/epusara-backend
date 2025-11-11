@@ -42,12 +42,6 @@ const updateRefKategoriJenazah = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-// ADD THIS NEW CONTROLLER FOR PUT
-const replaceRefKategoriJenazah = catchAsync(async (req, res) => {
-  const result = await refKategoriJenazahService.replaceRefKategoriJenazahById(req.params.id, req.body);
-  res.send(result);
-});
-
 const deleteRefKategoriJenazah = catchAsync(async (req, res) => {
   await refKategoriJenazahService.deleteRefKategoriJenazahById(req.params.id);
   res.status(204).send();
@@ -58,6 +52,5 @@ module.exports = {
   getRefKategoriJenazahs,
   getRefKategoriJenazah,
   updateRefKategoriJenazah,
-  replaceRefKategoriJenazah, // ADD THIS
   deleteRefKategoriJenazah,
 };

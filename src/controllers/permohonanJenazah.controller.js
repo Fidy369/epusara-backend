@@ -44,16 +44,10 @@ const getByKategoriJenazah = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replacePermohonanJenazah = catchAsync(async (req, res) => {
-  const result = await permohonanJenazahService.replacePermohonanJenazahById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createPermohonanJenazah,
   getPermohonanJenazah,
   getPermohonanJenazahById,
-  replacePermohonanJenazah,
   updatePermohonanJenazah,
   deletePermohonanJenazah,
   getByPermohonanId,

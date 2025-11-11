@@ -39,24 +39,10 @@ const deletePasswordHistory = {
   }),
 };
 
-const updatePasswordHistory = {
-  params: Joi.object().keys({
-    historyId: Joi.number().integer().required(),
-  }),
-  body: Joi.object()
-    .keys({
-      selector: Joi.string().length(12),
-      hashed_token: Joi.string().length(64),
-      expires_at: Joi.date(),
-    })
-    .min(1), // At least one field must be provided
-};
-
 module.exports = {
   createPasswordHistory,
   queryPasswordHistory,
   getPasswordHistory,
-  updatePasswordHistory,
   getPasswordHistoryByUser,
   deletePasswordHistory,
 };

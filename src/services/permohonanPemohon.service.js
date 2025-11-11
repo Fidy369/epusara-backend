@@ -69,43 +69,10 @@ const getByHubungan = async (refHubunganId) => {
   });
 };
 
-const replacePermohonanPemohonById = async (id, replaceBody) => {
-  const existingRecord = await prisma.permohonan_pemohon.findUnique({
-    where: { id },
-  });
-
-  if (!existingRecord) {
-    throw new Error('Permohonan pemohon not found');
-  }
-
-  return prisma.permohonan_pemohon.update({
-    where: { id },
-    data: {
-      permohonan_id: replaceBody.permohonan_id,
-      nama_pemohon: replaceBody.nama_pemohon,
-      jenis_pengenalan: replaceBody.jenis_pengenalan,
-      no_pengenalan: replaceBody.no_pengenalan,
-      ref_hubungan_id: replaceBody.ref_hubungan_id,
-      hubungan_lain: replaceBody.hubungan_lain,
-      is_waris: replaceBody.is_waris,
-      phone: replaceBody.phone,
-      email: replaceBody.email,
-      address1: replaceBody.address1,
-      address2: replaceBody.address2,
-      address3: replaceBody.address3,
-      poskod: replaceBody.poskod,
-      updated_by: replaceBody.updated_by,
-      updated_at: new Date(),
-    },
-  });
-};
-
-
 module.exports = {
   createPermohonanPemohon,
   getPermohonanPemohon,
   getPermohonanPemohonById,
-  replacePermohonanPemohonById,
   updatePermohonanPemohonById,
   deletePermohonanPemohonById,
   getByPermohonanId,

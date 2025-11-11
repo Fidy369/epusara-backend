@@ -43,20 +43,6 @@ const updateRefBahagianBadan = {
     .min(1),
 };
 
-// ADD THIS NEW VALIDATION FOR PUT
-const replaceRefBahagianBadan = {
-  params: Joi.object().keys({
-    id: Joi.string().length(4).required(),
-  }),
-  body: Joi.object().keys({
-    kod_bahagian_badan: Joi.string().length(4).required(),
-    label_ms: Joi.string().max(50).required(),
-    label_en: Joi.string().max(50).allow(null),
-    is_active: Joi.boolean().allow(null),
-    updated_by: Joi.number().integer().allow(null),
-  }),
-};
-
 const deleteRefBahagianBadan = {
   params: Joi.object().keys({
     id: Joi.string().length(4).required(),
@@ -68,6 +54,5 @@ module.exports = {
   getRefBahagianBadans,
   getRefBahagianBadan,
   updateRefBahagianBadan,
-  replaceRefBahagianBadan, // ADD THIS
   deleteRefBahagianBadan,
 };

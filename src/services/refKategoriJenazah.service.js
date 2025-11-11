@@ -81,39 +81,9 @@ const getActiveCategories = async () => {
  * @returns {Promise<RefKategoriJenazah>}
  */
 const updateRefKategoriJenazahById = async (id, updateBody) => {
-  const record = await getRefKategoriJenazahById(id);
-  if (!record) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Reference kategori jenazah not found');
-  }
   return prisma.ref_kategori_jenazah.update({
     where: { id: parseInt(id) },
     data: updateBody,
-  });
-};
-
-/**
- * Replace deceased category by id (PUT - full replacement)
- * @param {number} categoryId
- * @param {Object} replaceBody
- * @returns {Promise<RefKategoriJenazah>}
- */
-const replaceRefKategoriJenazahById = async (id, replaceBody) => {
-  const record = await getRefKategoriJenazahById(id);
-  if (!record) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Reference kategori jenazah not found');
-  }
-  
-  return prisma.ref_kategori_jenazah.update({
-    where: { id: parseInt(id) },
-    data: {
-      kod_kategori_jenazah: replaceBody.kod_kategori_jenazah,
-      label_ms: replaceBody.label_ms,
-      label_en: replaceBody.label_en,
-      harga: replaceBody.harga || 0,
-      flag_aktif: replaceBody.flag_aktif,
-      updated_by: replaceBody.updated_by || 0,
-      updated_at: new Date(),
-    },
   });
 };
 
@@ -123,10 +93,6 @@ const replaceRefKategoriJenazahById = async (id, replaceBody) => {
  * @returns {Promise<RefKategoriJenazah>}
  */
 const deleteRefKategoriJenazahById = async (id) => {
-  const record = await getRefKategoriJenazahById(id);
-  if (!record) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Reference kategori jenazah not found');
-  }
   return prisma.ref_kategori_jenazah.delete({ where: { id: parseInt(id) } });
 };
 
@@ -135,6 +101,5 @@ module.exports = {
   getRefKategoriJenazahs,
   getRefKategoriJenazahById,
   updateRefKategoriJenazahById,
-  replaceRefKategoriJenazahById, // ADD THIS
   deleteRefKategoriJenazahById,
 };

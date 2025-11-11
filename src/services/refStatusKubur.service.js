@@ -45,32 +45,9 @@ const deleteRefStatusKuburByKod = async (kod) => {
   return prisma.ref_status_kubur.delete({ where: { kod_status_kubur: kod } });
 };
 
-const replaceRefStatusKuburByKod = async (kod, updateBody) => {
-  const refStatusKubur = await prisma.ref_status_kubur.findUnique({
-    where: { kod_status_kubur: kod },
-  });
-
-  if (!refStatusKubur) {
-    throw new Error('Reference status kubur not found');
-  }
-
-  return prisma.ref_status_kubur.update({
-    where: { kod_status_kubur: kod },
-    data: {
-      label_ms: updateBody.label_ms,
-      label_en: updateBody.label_en,
-      color: updateBody.color,
-      is_active: updateBody.is_active,
-      updated_by: updateBody.updated_by,
-      updated_at: new Date(),
-    },
-  });
-};
-
 module.exports = {
   createRefStatusKubur,
   getRefStatusKuburs,
-  replaceRefStatusKuburByKod,
   getRefStatusKuburByKod,
   updateRefStatusKuburByKod,
   deleteRefStatusKuburByKod,

@@ -115,8 +115,8 @@ const router = express.Router();
  */
 router
   .route('/')
-  .post(auth('manageUsers'), validate(userProfileValidation.createUserProfile), userProfileController.createUserProfile)
-  .get(auth('getUsers'), validate(userProfileValidation.queryUserProfiles), userProfileController.queryUserProfiles);
+  .post(validate(userProfileValidation.createUserProfile), userProfileController.createUserProfile)
+  .get(validate(userProfileValidation.queryUserProfiles), userProfileController.queryUserProfiles);
 
 /**
  * @swagger
@@ -137,81 +137,8 @@ router
  *         description: OK
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace user profile (full update)
- *     tags: [User Profiles]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: profileId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - full_name
- *               - phone_no
- *               - email
- *               - gender
- *               - jenis_pengenalan
- *               - no_pengenalan
- *               - address1
- *               - poskod
- *               - bandar
- *               - daerah
- *               - negeri
- *             properties:
- *               full_name:
- *                 type: string
- *               phone_no:
- *                 type: string
- *                 maxLength: 15
- *               email:
- *                 type: string
- *                 format: email
- *               gender:
- *                 type: string
- *                 enum: [male, female, other]
- *               jenis_pengenalan:
- *                 type: string
- *                 enum: [NRIC, PASSPORT]
- *               no_pengenalan:
- *                 type: string
- *                 maxLength: 12
- *               address1:
- *                 type: string
- *                 maxLength: 300
- *               address2:
- *                 type: string
- *                 maxLength: 300
- *               address3:
- *                 type: string
- *                 maxLength: 300
- *               poskod:
- *                 type: string
- *                 maxLength: 5
- *               bandar:
- *                 type: string
- *                 maxLength: 100
- *               daerah:
- *                 type: string
- *                 maxLength: 100
- *               negeri:
- *                 type: string
- *                 maxLength: 100
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update user profile (partial update)
+ *     summary: Update user profile
  *     tags: [User Profiles]
  *     security:
  *       - bearerAuth: []
@@ -290,10 +217,9 @@ router
  */
 router
   .route('/:profileId')
-  .get(auth('getUsers'), validate(userProfileValidation.getUserProfile), userProfileController.getUserProfile)
-  .put(auth('manageUsers'), validate(userProfileValidation.replaceUserProfile), userProfileController.replaceUserProfile)
-  .patch(auth('manageUsers'), validate(userProfileValidation.updateUserProfile), userProfileController.updateUserProfile)
-  .delete(auth('manageUsers'), validate(userProfileValidation.deleteUserProfile), userProfileController.deleteUserProfile);
+  .get(validate(userProfileValidation.getUserProfile), userProfileController.getUserProfile)
+  .patch(validate(userProfileValidation.updateUserProfile), userProfileController.updateUserProfile)
+  .delete(validate(userProfileValidation.deleteUserProfile), userProfileController.deleteUserProfile);
 
 /**
  * @swagger
@@ -317,6 +243,6 @@ router
  */
 router
   .route('/user/:userId')
-  .get(auth('getUsers'), validate(userProfileValidation.getUserProfileByUserId), userProfileController.getUserProfileByUserId);
+  .get(validate(userProfileValidation.getUserProfileByUserId), userProfileController.getUserProfileByUserId);
 
 module.exports = router;

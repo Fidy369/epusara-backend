@@ -57,11 +57,6 @@ const getErrorStatistics = catchAsync(async (req, res) => {
   res.send(stats);
 });
 
-const updateErrorLog = catchAsync(async (req, res) => {
-  const errorLog = await errorLogService.updateErrorLogById(parseInt(req.params.errorId), req.body);
-  res.send(errorLog);
-});
-
 module.exports = {
   createErrorLog,
   queryErrorLogs,
@@ -69,5 +64,4 @@ module.exports = {
   deleteErrorLog,
   clearOldErrorLogs,
   getErrorStatistics,
-  updateErrorLog,
 };

@@ -13,7 +13,6 @@ router
 router
   .route('/:id')
   .get(validate(pertanyaanValidation.getPertanyaan), pertanyaanController.getPertanyaan)
-  .put(validate(pertanyaanValidation.replacePertanyaan), pertanyaanController.replacePertanyaan)
   .patch(validate(pertanyaanValidation.updatePertanyaan), pertanyaanController.updatePertanyaan)
   .delete(validate(pertanyaanValidation.deletePertanyaan), pertanyaanController.deletePertanyaan);
 
@@ -141,66 +140,8 @@ module.exports = router;
  *       "404":
  *         description: Not found
  *
- *   put:
- *     summary: Replace a question (full update)
- *     description: Replaces the entire question resource. All required fields must be provided.
- *     tags: [Pertanyaan]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Question id
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - name
- *               - phone_no
- *               - email
- *               - kod_kategori_pertanyaan
- *               - question
- *             properties:
- *               name:
- *                 type: string
- *               phone_no:
- *                 type: string
- *               email:
- *                 type: string
- *                 format: email
- *               kod_kategori_pertanyaan:
- *                 type: string
- *                 maxLength: 5
- *               question:
- *                 type: string
- *               status:
- *                 type: string
- *                 enum: [N, A]
- *               notes:
- *                 type: string
- *             example:
- *               name: "Ahmad bin Ali"
- *               phone_no: "0123456789"
- *               email: "ahmad@example.com"
- *               kod_kategori_pertanyaan: "GEN01"
- *               question: "How do I apply for burial permit?"
- *               status: "N"
- *               notes: null
- *     responses:
- *       "200":
- *         description: OK
- *       "400":
- *         description: Bad Request
- *       "404":
- *         description: Not found
- *
  *   patch:
- *     summary: Update a question (partial update)
- *     description: Updates only the provided fields of the question.
+ *     summary: Update a question
  *     tags: [Pertanyaan]
  *     parameters:
  *       - in: path

@@ -39,15 +39,9 @@ const deleteRefNegara = catchAsync(async (req, res) => {
   res.status(204).send();
 });
 
-const replaceRefNegara = catchAsync(async (req, res) => {
-  const result = await refNegaraService.replaceRefNegaraByKod(req.params.kod, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createRefNegara,
   getRefNegaras,
-  replaceRefNegara,
   getRefNegara,
   updateRefNegara,
   deleteRefNegara,

@@ -54,22 +54,11 @@ const removeAllPermissionsFromRole = {
   }),
 };
 
-const replaceRolePermissions = {
-  params: Joi.object().keys({
-    roleId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    permission_ids: Joi.array().items(Joi.number().integer()).required(),
-    updated_by: Joi.number().integer().required(),
-  }),
-};
-
 module.exports = {
   assignPermissionToRole,
   getRolePermissions,
   getPermissionsByRole,
   getRolesByPermission,
-  replaceRolePermissions,
   removePermissionFromRole,
   bulkAssignPermissionsToRole,
   removeAllPermissionsFromRole,

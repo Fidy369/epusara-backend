@@ -48,17 +48,11 @@ const getByObjectType = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replaceAuditLog = catchAsync(async (req, res) => {
-  const result = await auditLogService.replaceAuditLogById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createAuditLog,
   getAuditLogs,
   getAuditLogById,
   updateAuditLog,
-  replaceAuditLog,
   deleteAuditLog,
   getByEventId,
   getByObjectType,

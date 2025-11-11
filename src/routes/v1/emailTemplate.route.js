@@ -57,10 +57,6 @@ const router = express.Router();
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - key
- *               - title
- *               - content
  *             properties:
  *               key:
  *                 type: string
@@ -149,52 +145,8 @@ router
  *               $ref: '#/components/schemas/EmailTemplate'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace email template (full update)
- *     tags: [EmailTemplate]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Template ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - key
- *               - title
- *               - content
- *             properties:
- *               key:
- *                 type: string
- *                 maxLength: 50
- *               description:
- *                 type: string
- *                 maxLength: 255
- *               title:
- *                 type: string
- *                 maxLength: 255
- *               content:
- *                 type: string
- *                 maxLength: 5000
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/EmailTemplate'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update email template (partial update)
+ *     summary: Update email template
  *     tags: [EmailTemplate]
  *     security:
  *       - bearerAuth: []
@@ -214,16 +166,12 @@ router
  *             properties:
  *               key:
  *                 type: string
- *                 maxLength: 50
  *               description:
  *                 type: string
- *                 maxLength: 255
  *               title:
  *                 type: string
- *                 maxLength: 255
  *               content:
  *                 type: string
- *                 maxLength: 5000
  *     responses:
  *       "200":
  *         description: OK
@@ -254,7 +202,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(emailTemplateValidation.getEmailTemplateById), emailTemplateController.getEmailTemplateById)
-  .put(/*auth(),*/ validate(emailTemplateValidation.replaceEmailTemplate), emailTemplateController.replaceEmailTemplate)
   .patch(/*auth(),*/ validate(emailTemplateValidation.updateEmailTemplate), emailTemplateController.updateEmailTemplate)
   .delete(/*auth(),*/ validate(emailTemplateValidation.deleteEmailTemplate), emailTemplateController.deleteEmailTemplate);
 

@@ -663,9 +663,8 @@ model ref_negeri {
   ref_poskod ref_poskod[]
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model ref_paparan_pengumuman {
-  id           Int
+  id           Int      @id @default(autoincrement())
   content_ms   String   @db.Text
   content_en   String   @db.Text
   is_active    Boolean
@@ -676,8 +675,6 @@ model ref_paparan_pengumuman {
   created_by   Int
   updated_at   DateTime @default(now()) @db.DateTime(0)
   updated_by   Int
-
-  @@ignore
 }
 
 model ref_poskod {

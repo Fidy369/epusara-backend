@@ -103,40 +103,6 @@ router
  *         description: OK
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Update password history entry
- *     tags: [Password History]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: historyId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               selector:
- *                 type: string
- *                 minLength: 12
- *                 maxLength: 12
- *               hashed_token:
- *                 type: string
- *                 minLength: 64
- *                 maxLength: 64
- *               expires_at:
- *                 type: string
- *                 format: date-time
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   delete:
  *     summary: Delete password history entry
  *     tags: [Password History]
@@ -157,7 +123,6 @@ router
 router
   .route('/:historyId')
   .get(auth('manageUsers'), validate(passwordHistoryValidation.getPasswordHistory), passwordHistoryController.getPasswordHistory)
-  .put(auth('manageUsers'), validate(passwordHistoryValidation.updatePasswordHistory), passwordHistoryController.updatePasswordHistory)
   .delete(auth('manageUsers'), validate(passwordHistoryValidation.deletePasswordHistory), passwordHistoryController.deletePasswordHistory);
 
 /**

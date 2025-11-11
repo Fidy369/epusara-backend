@@ -53,34 +53,11 @@ const getByObjectType = async (objectType) => {
   });
 };
 
-const replaceAuditLogById = async (id, replaceBody) => {
-  // Check if record exists
-  const auditLog = await prisma.audit_log.findUnique({
-    where: { id },
-  });
-  
-  if (!auditLog) {
-    throw new Error('Audit log not found');
-  }
-
-  // Replace with new data (all fields required)
-  return prisma.audit_log.update({
-    where: { id },
-    data: {
-      event_id: replaceBody.event_id,
-      object_type: replaceBody.object_type,
-      object_id: replaceBody.object_id,
-      changed_data: replaceBody.changed_data ?? null,
-    },
-  });
-};
-
 module.exports = {
   createAuditLog,
   getAuditLogs,
   getAuditLogById,
   updateAuditLogById,
-  replaceAuditLogById,
   deleteAuditLogById,
   getByEventId,
   getByObjectType,

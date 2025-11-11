@@ -54,26 +54,10 @@ const deleteRefPaparanPengumuman = {
   }),
 };
 
-const replaceRefPaparanPengumuman = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    content_ms: Joi.string().required(),
-    content_en: Joi.string().required(),
-    is_active: Joi.boolean().required(),
-    desktop_url: Joi.string().max(255).required(),
-    thumnail_url: Joi.string().max(255).required(),
-    mobile_url: Joi.string().max(255).required(),
-    updated_by: Joi.number().integer().required(),
-  }),
-};
-
 module.exports = {
   createRefPaparanPengumuman,
   getRefPaparanPengumumans,
   getRefPaparanPengumuman,
-  replaceRefPaparanPengumuman,
   updateRefPaparanPengumuman,
   deleteRefPaparanPengumuman,
 };

@@ -110,32 +110,10 @@ const deleteRunningNumberById = async (id) => {
   return prisma.permohonan_running_number.delete({ where: { id } });
 };
 
-/**
- * Replace running number by id
- */
-const replaceRunningNumber = async (id, updateBody) => {
-  const runningNumber = await getRunningNumberById(id);
-  if (!runningNumber) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Running number not found');
-  }
-
-  // Ensure date is properly formatted
-  if (updateBody.date) {
-    updateBody.date = new Date(updateBody.date);
-    updateBody.date.setHours(0, 0, 0, 0);
-  }
-
-  return prisma.permohonan_running_number.update({
-    where: { id },
-    data: updateBody
-  });
-};
-
 module.exports = {
   createRunningNumber,
   queryRunningNumbers,
   getRunningNumberById,
-  replaceRunningNumber,
   getOrCreateRunningNumber,
   incrementRunningNumber,
   getNextRunningNumber,

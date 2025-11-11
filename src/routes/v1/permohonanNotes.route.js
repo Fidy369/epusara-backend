@@ -150,51 +150,8 @@ router
  *               $ref: '#/components/schemas/PermohonanNotes'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace application note (full update)
- *     tags: [PermohonanNotes]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Note ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - permohonan_id
- *               - type
- *               - notes
- *               - updated_by
- *             properties:
- *               permohonan_id:
- *                 type: integer
- *               type:
- *                 type: string
- *                 maxLength: 50
- *               notes:
- *                 type: string
- *                 maxLength: 500
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/PermohonanNotes'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update application note (partial update)
+ *     summary: Update application note
  *     tags: [PermohonanNotes]
  *     security:
  *       - bearerAuth: []
@@ -250,7 +207,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(permohonanNotesValidation.getPermohonanNotesById), permohonanNotesController.getPermohonanNotesById)
-  .put(/*auth(),*/ validate(permohonanNotesValidation.replacePermohonanNotes), permohonanNotesController.replacePermohonanNotes)
   .patch(/*auth(),*/ validate(permohonanNotesValidation.updatePermohonanNotes), permohonanNotesController.updatePermohonanNotes)
   .delete(/*auth(),*/ validate(permohonanNotesValidation.deletePermohonanNotes), permohonanNotesController.deletePermohonanNotes);
 

@@ -122,49 +122,6 @@ router
  *         description: OK
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Update error log
- *     tags: [Error Logs]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: errorId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               type:
- *                 type: string
- *               message:
- *                 type: string
- *               file:
- *                 type: string
- *               line:
- *                 type: integer
- *               trace:
- *                 type: string
- *               context:
- *                 type: string
- *               user_id:
- *                 type: integer
- *               ip_address:
- *                 type: string
- *               method:
- *                 type: string
- *               url:
- *                 type: string
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   delete:
  *     summary: Delete error log
  *     tags: [Error Logs]
@@ -185,7 +142,6 @@ router
 router
   .route('/:errorId')
   .get(/*auth('viewErrorLogs'),*/ validate(errorLogValidation.getErrorLog), errorLogController.getErrorLog)
-  .put(/*auth('manageErrorLogs'),*/ validate(errorLogValidation.updateErrorLog), errorLogController.updateErrorLog)
   .delete(/*auth('manageErrorLogs'),*/ validate(errorLogValidation.deleteErrorLog), errorLogController.deleteErrorLog);
 
 /**

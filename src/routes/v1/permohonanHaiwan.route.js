@@ -147,46 +147,8 @@ router
  *               $ref: '#/components/schemas/PermohonanHaiwan'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace application animal (full update)
- *     tags: [PermohonanHaiwan]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Animal ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - permohonan_id
- *               - ref_jenis_haiwan_kod
- *             properties:
- *               permohonan_id:
- *                 type: integer
- *               ref_jenis_haiwan_kod:
- *                 type: string
- *                 maxLength: 4
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/PermohonanHaiwan'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update application animal (partial update)
+ *     summary: Update application animal
  *     tags: [PermohonanHaiwan]
  *     security:
  *       - bearerAuth: []
@@ -241,7 +203,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(permohonanHaiwanValidation.getPermohonanHaiwanById), permohonanHaiwanController.getPermohonanHaiwanById)
-  .put(/*auth(),*/ validate(permohonanHaiwanValidation.replacePermohonanHaiwan), permohonanHaiwanController.replacePermohonanHaiwan)
   .patch(/*auth(),*/ validate(permohonanHaiwanValidation.updatePermohonanHaiwan), permohonanHaiwanController.updatePermohonanHaiwan)
   .delete(/*auth(),*/ validate(permohonanHaiwanValidation.deletePermohonanHaiwan), permohonanHaiwanController.deletePermohonanHaiwan);
 

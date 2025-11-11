@@ -57,22 +57,10 @@ const getByJenisHaiwan = {
   }),
 };
 
-const replacePermohonanHaiwan = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    permohonan_id: Joi.number().integer().required(),
-    ref_jenis_haiwan_kod: Joi.string().length(4).required(),
-    updated_by: Joi.number().integer(),
-  }),
-};
-
 module.exports = {
   createPermohonanHaiwan,
   getPermohonanHaiwan,
   getPermohonanHaiwanById,
-  replacePermohonanHaiwan,
   updatePermohonanHaiwan,
   deletePermohonanHaiwan,
   getByPermohonanId,

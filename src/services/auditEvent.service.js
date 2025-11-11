@@ -34,28 +34,6 @@ const updateAuditEventById = async (id, updateBody) => {
   });
 };
 
-const replaceAuditEventById = async (id, replaceBody) => {
-  // Check if record exists
-  const auditEvent = await prisma.audit_event.findUnique({
-    where: { id },
-  });
-  
-  if (!auditEvent) {
-    throw new Error('Audit event not found');
-  }
-
-  // Replace with new data (event is required, others are optional)
-  return prisma.audit_event.update({
-    where: { id },
-    data: {
-      user_id: replaceBody.user_id ?? null,
-      ip_address: replaceBody.ip_address ?? null,
-      event: replaceBody.event,
-      description: replaceBody.description ?? null,
-    },
-  });
-};
-
 const deleteAuditEventById = async (id) => {
   return prisma.audit_event.delete({
     where: { id },
@@ -81,7 +59,6 @@ module.exports = {
   getAuditEvents,
   getAuditEventById,
   updateAuditEventById,
-  replaceAuditEventById,
   deleteAuditEventById,
   getByUserId,
   getByEvent,

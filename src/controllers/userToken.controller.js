@@ -63,18 +63,12 @@ const deleteUserTokensByUser = catchAsync(async (req, res) => {
   res.send({ deleted_count: result.count });
 });
 
-const replaceUserToken = catchAsync(async (req, res) => {
-  const token = await userTokenService.replaceUserTokenById(parseInt(req.params.tokenId), req.body);
-  res.send(token);
-});
-
 module.exports = {
   createUserToken,
   queryUserTokens,
   getUserToken,
   getUserTokenBySelector,
   getUserTokensByUser,
-  replaceUserToken,
   updateUserToken,
   deleteUserToken,
   deleteExpiredTokens,

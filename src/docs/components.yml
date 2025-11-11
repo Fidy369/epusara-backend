@@ -19,6 +19,123 @@ components:
         name: fake name
         role: user
 
+    EmailQueue:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the email queue entry
+        recipient:
+          type: string
+          format: email
+          description: Email recipient address
+        subject:
+          type: string
+          description: Email subject line
+        body:
+          type: string
+          description: Email body content
+        status:
+          type: string
+          enum: [pending, sent, failed, retry]
+          description: Current status of the email
+        attempts:
+          type: integer
+          minimum: 0
+          description: Number of send attempts
+        sentAt:
+          type: string
+          format: date-time
+          description: Timestamp when email was sent
+        lastError:
+          type: string
+          description: Last error message if failed
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      example:
+        id: "123e4567-e89b-12d3-a456-426614174000"
+        recipient: "user@example.com"
+        subject: "Welcome to ePusara"
+        body: "Thank you for registering..."
+        status: "pending"
+        attempts: 0
+        sentAt: null
+        lastError: null
+        createdAt: "2024-01-15T10:30:00Z"
+        updatedAt: "2024-01-15T10:30:00Z"
+
+    PaginatedResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items: {}
+        page:
+          type: integer
+          minimum: 1
+        limit:
+          type: integer
+          minimum: 1
+        totalPages:
+          type: integer
+          minimum: 0
+        totalResults:
+          type: integer
+          minimum: 0
+      example:
+        results: []
+        page: 1
+        limit: 10
+        totalPages: 1
+        totalResults: 5
+
+    HealthCheck:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, unhealthy]
+        timestamp:
+          type: string
+          format: date-time
+        version:
+          type: string
+        uptime:
+          type: number
+        database:
+          type: object
+          properties:
+            status:
+              type: string
+              enum: [connected, disconnected]
+            responseTime:
+              type: number
+        memory:
+          type: object
+          properties:
+            used:
+              type: number
+            total:
+              type: number
+            percentage:
+              type: number
+      example:
+        status: "healthy"
+        timestamp: "2024-01-15T10:30:00Z"
+        version: "0.1.0"
+        uptime: 3600
+        database:
+          status: "connected"
+          responseTime: 25
+        memory:
+          used: 134217728
+          total: 268435456
+          percentage: 50
+
     Token:
       type: object
       properties:
@@ -46,6 +163,12 @@ components:
           type: number
         message:
           type: string
+        stack:
+          type: string
+          description: Error stack trace (development only)
+      example:
+        code: 400
+        message: "Validation error"
 
   responses:
     DuplicateEmail:

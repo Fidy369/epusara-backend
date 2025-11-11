@@ -103,47 +103,8 @@ router
  *         description: OK
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace body part reference (full update)
- *     tags: [RefBahagianBadan]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *           maxLength: 4
- *         description: Body part code (kod_bahagian_badan)
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - kod_bahagian_badan
- *               - label_ms
- *             properties:
- *               kod_bahagian_badan:
- *                 type: string
- *                 maxLength: 4
- *               label_ms:
- *                 type: string
- *                 maxLength: 50
- *               label_en:
- *                 type: string
- *                 maxLength: 50
- *               is_active:
- *                 type: boolean
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
  *   patch:
- *     summary: Update body part reference (partial update)
+ *     summary: Update body part reference
  *     tags: [RefBahagianBadan]
  *     parameters:
  *       - in: path
@@ -196,7 +157,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(refBahagianBadanValidation.getRefBahagianBadan), refBahagianBadanController.getRefBahagianBadan)
-  .put(/*auth(),*/ validate(refBahagianBadanValidation.replaceRefBahagianBadan), refBahagianBadanController.replaceRefBahagianBadan)
   .patch(/*auth(),*/ validate(refBahagianBadanValidation.updateRefBahagianBadan), refBahagianBadanController.updateRefBahagianBadan)
   .delete(/*auth(),*/ validate(refBahagianBadanValidation.deleteRefBahagianBadan), refBahagianBadanController.deleteRefBahagianBadan);
 

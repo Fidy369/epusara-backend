@@ -9,8 +9,9 @@ const register = catchAsync(async (req, res) => {
 });
 
 const login = catchAsync(async (req, res) => {
-  const { email, password } = req.body;
-  const user = await authService.loginUserWithEmailAndPassword(email, password);
+  const { no_pengenalan, ic, password } = req.body;
+  const identifier = no_pengenalan || ic;
+  const user = await authService.loginUserWithIcAndPassword(identifier, password);
   const tokens = await tokenService.generateAuthTokens(user);
   res.send({ user, tokens });
 });

@@ -51,23 +51,9 @@ const deleteRefKategoriPertanyaan = {
   }),
 };
 
-const replaceRefKategoriPertanyaan = {
-  params: Joi.object().keys({
-    kod: Joi.string().length(5).required(),
-  }),
-  body: Joi.object().keys({
-    label_ms: Joi.string().max(50).required(),
-    label_en: Joi.string().max(50).required(),
-    order_sequence: Joi.number().integer().min(0).default(0),
-    is_active: Joi.boolean().default(false),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createRefKategoriPertanyaan,
   getRefKategoriPertanyaans,
-  replaceRefKategoriPertanyaan,
   getRefKategoriPertanyaan,
   updateRefKategoriPertanyaan,
   deleteRefKategoriPertanyaan,

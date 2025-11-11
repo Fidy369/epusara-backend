@@ -10,6 +10,12 @@ const specs = swaggerJsdoc({
   apis: ['src/docs/*.yml', 'src/routes/v1/*.js'],
 });
 
+// Serve swagger.json
+router.get('/swagger.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(specs);
+});
+
 router.use('/', swaggerUi.serve);
 router.get(
   '/',

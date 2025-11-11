@@ -49,16 +49,10 @@ const deleteUserProfile = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-const replaceUserProfile = catchAsync(async (req, res) => {
-  const profile = await userProfileService.replaceUserProfileById(parseInt(req.params.profileId), req.body);
-  res.send(profile);
-});
-
 module.exports = {
   createUserProfile,
   queryUserProfiles,
   getUserProfile,
-  replaceUserProfile,
   getUserProfileByUserId,
   updateUserProfile,
   deleteUserProfile,

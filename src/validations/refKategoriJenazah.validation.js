@@ -52,21 +52,6 @@ const updateRefKategoriJenazah = {
     .min(1),
 };
 
-// ADD THIS NEW VALIDATION FOR PUT
-const replaceRefKategoriJenazah = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    kod_kategori_jenazah: Joi.string().length(4).required(),
-    label_ms: Joi.string().max(50).required(),
-    label_en: Joi.string().max(50).required(),
-    harga: Joi.number().precision(2).min(0).default(0),
-    flag_aktif: Joi.number().valid(0, 1).required(),
-    updated_by: Joi.number().integer(),
-  }),
-};
-
 const deleteRefKategoriJenazah = {
   params: Joi.object().keys({
     id: Joi.number().integer().required(),
@@ -78,6 +63,5 @@ module.exports = {
   getRefKategoriJenazahs,
   getRefKategoriJenazah,
   updateRefKategoriJenazah,
-  replaceRefKategoriJenazah, // ADD THIS
   deleteRefKategoriJenazah,
 };

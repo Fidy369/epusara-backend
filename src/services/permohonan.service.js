@@ -153,29 +153,6 @@ const updatePermohonanById = async (permohonanId, updateBody) => {
 };
 
 /**
- * Replace permohonan by id (PUT - full replacement)
- * @param {number} permohonanId
- * @param {Object} replaceBody
- * @returns {Promise<Permohonan>}
- */
-const replacePermohonanById = async (permohonanId, replaceBody) => {
-  const permohonan = await getPermohonanById(permohonanId);
-  if (!permohonan) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Permohonan not found');
-  }
-
-  return prisma.permohonan.update({
-    where: { id: permohonanId },
-    data: {
-      kod_jenis_permohonan: replaceBody.kod_jenis_permohonan,
-      ref_kategori_jenazah_id: replaceBody.ref_kategori_jenazah_id,
-      status_permohonan: replaceBody.status_permohonan || permohonan.status_permohonan,
-      updated_at: new Date(),
-    },
-  });
-};
-
-/**
  * Submit permohonan
  * @param {number} permohonanId
  * @returns {Promise<Permohonan>}
@@ -274,7 +251,6 @@ module.exports = {
   queryPermohonans,
   getPermohonanById,
   updatePermohonanById,
-  replacePermohonanById, // ADD THIS
   submitPermohonan,
   approvePermohonan,
   rejectPermohonan,

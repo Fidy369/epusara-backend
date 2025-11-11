@@ -54,22 +54,6 @@ const updatePertanyaanFaq = {
     .min(1),
 };
 
-const replacePertanyaanFaq = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    kod_kategori_pertanyaan: Joi.string().length(5).required(),
-    question_ms: Joi.string().max(500).required(),
-    answer_ms: Joi.string().max(1000).required(),
-    question_en: Joi.string().max(500).required(),
-    answer_en: Joi.string().max(1000).required(),
-    order: Joi.number().integer().min(0).default(0),
-    is_active: Joi.boolean().default(false),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 const deletePertanyaanFaq = {
   params: Joi.object().keys({
     id: Joi.number().integer().required(),
@@ -82,6 +66,5 @@ module.exports = {
   getPertanyaanFaq,
   getPertanyaanFaqsByCategory,
   updatePertanyaanFaq,
-  replacePertanyaanFaq,
   deletePertanyaanFaq,
 };

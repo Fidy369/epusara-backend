@@ -297,52 +297,6 @@ router.route('/state/:stateCode').get(/*auth(),*/ validate(refPoskodValidation.g
  *               $ref: '#/components/schemas/RefPoskod'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace a postal code (full update)
- *     tags: [RefPoskod]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: postalCodeId
- *         required: true
- *         schema:
- *           type: integer
- *         description: Postal code id
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - bandar
- *               - daerah
- *               - kod_negeri
- *             properties:
- *               poskod:
- *                 type: string
- *                 maxLength: 6
- *               bandar:
- *                 type: string
- *                 maxLength: 50
- *               daerah:
- *                 type: string
- *                 maxLength: 50
- *               kod_negeri:
- *                 type: string
- *                 maxLength: 2
- *               is_active:
- *                 type: boolean
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/RefPoskod'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   delete:
  *     summary: Delete a postal code
  *     tags: [RefPoskod]
@@ -365,7 +319,6 @@ router
   .route('/:postalCodeId')
   .get(/*auth(),*/ validate(refPoskodValidation.getPostalCode), refPoskodController.getPostalCode)
   .patch(/*auth(),*/ validate(refPoskodValidation.updatePostalCode), refPoskodController.updatePostalCode)
-  .put(/*auth(),*/ validate(refPoskodValidation.replacePostalCode), refPoskodController.replacePostalCode)
   .delete(/*auth(),*/ validate(refPoskodValidation.deletePostalCode), refPoskodController.deletePostalCode);
 
 module.exports = router;

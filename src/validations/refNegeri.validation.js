@@ -46,22 +46,10 @@ const deleteRefNegeri = {
   }),
 };
 
-const replaceRefNegeri = {
-  params: Joi.object().keys({
-    kod: Joi.string().length(2).required(),
-  }),
-  body: Joi.object().keys({
-    label: Joi.string().max(50).required(),
-    is_active: Joi.boolean().default(false),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createRefNegeri,
   getRefNegeris,
   getRefNegeri,
-  replaceRefNegeri,
   updateRefNegeri,
   deleteRefNegeri,
 };

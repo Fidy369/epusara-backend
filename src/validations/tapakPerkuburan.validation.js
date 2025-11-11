@@ -50,24 +50,9 @@ const deleteTapakPerkuburan = {
   }),
 };
 
-const replaceTapakPerkuburan = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    nama_tapak: Joi.string().max(100).required(),
-    lokasi_tapak: Joi.string().max(255).default(''),
-    keluasan_tapak: Joi.number().precision(6),
-    kapasiti_lot_keseluruhan: Joi.number().integer(),
-    description: Joi.string().max(255),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createTapakPerkuburan,
   getTapakPerkuburans,
-  replaceTapakPerkuburan,
   getTapakPerkuburan,
   updateTapakPerkuburan,
   deleteTapakPerkuburan,

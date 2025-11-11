@@ -67,40 +67,9 @@ const removeUserFromSite = async (userId, siteId) => {
   });
 };
 
-// NEW: Update service function
-const updateUserSiteAssignment = async (userId, siteId, updateBody) => {
-  const assignment = await getUserSiteAssignmentById(userId, siteId);
-  if (!assignment) {
-    throw new ApiError(404, 'User site assignment not found');
-  }
-
-  // Delete the old assignment
-  await prisma.user_tapak_perkuburan.delete({
-    where: {
-      user_id_tapak_perkuburan_id: {
-        user_id: parseInt(userId),
-        tapak_perkuburan_id: parseInt(siteId)
-      }
-    }
-  });
-
-  // Create new assignment with updated site
-  return prisma.user_tapak_perkuburan.create({
-    data: {
-      user_id: parseInt(userId),
-      tapak_perkuburan_id: updateBody.tapak_perkuburan_id,
-    },
-    include: {
-      users: true,
-      tapak_perkuburan: true,
-    }
-  });
-};
-
 module.exports = {
   assignUserToSite,
   getUserSiteAssignments,
-  updateUserSiteAssignment,
   getUserSiteAssignmentById,
   removeUserFromSite,
 };

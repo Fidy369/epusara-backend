@@ -44,17 +44,11 @@ const getByJenisDokumen = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const putPermohonanDokumen = catchAsync(async (req, res) => {
-  const result = await permohonanDokumenService.putPermohonanDokumenById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createPermohonanDokumen,
   getPermohonanDokumen,
   getPermohonanDokumenById,
   updatePermohonanDokumen,
-  putPermohonanDokumen,
   deletePermohonanDokumen,
   getByPermohonanId,
   getByJenisDokumen,

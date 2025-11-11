@@ -13,7 +13,6 @@ router
 router
   .route('/:permohonanId')
   .get(validate(permohonanValidation.getPermohonan), permohonanController.getPermohonan)
-  .put(validate(permohonanValidation.replacePermohonan), permohonanController.replacePermohonan)
   .patch(validate(permohonanValidation.updatePermohonan), permohonanController.updatePermohonan)
   .delete(validate(permohonanValidation.deletePermohonan), permohonanController.deletePermohonan);
 
@@ -166,42 +165,8 @@ module.exports = router;
  *       "404":
  *         description: Not found
  *
- *   put:
- *     summary: Replace an application (full update)
- *     tags: [Permohonan]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Application id
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - kod_jenis_permohonan
- *               - ref_kategori_jenazah_id
- *             properties:
- *               kod_jenis_permohonan:
- *                 type: string
- *                 maxLength: 2
- *               ref_kategori_jenazah_id:
- *                 type: integer
- *               status_permohonan:
- *                 type: string
- *                 enum: [DRAFT, IN_PROGRESS, APPROVED, REJECTED, CANCELLED, FINISHED]
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
- *
  *   patch:
- *     summary: Update an application (partial update)
+ *     summary: Update an application
  *     tags: [Permohonan]
  *     parameters:
  *       - in: path

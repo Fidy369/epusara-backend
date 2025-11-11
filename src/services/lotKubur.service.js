@@ -73,32 +73,10 @@ const deleteLotKuburById = async (id) => {
   return prisma.lot_kubur.delete({ where: { id: parseInt(id) } });
 };
 
-const replaceLotKuburById = async (id, replaceBody) => {
-  const lotKubur = await prisma.lot_kubur.findUnique({ 
-    where: { id: parseInt(id) } 
-  });
-  
-  if (!lotKubur) {
-    throw new Error('Lot kubur not found');
-  }
-
-  return prisma.lot_kubur.update({
-    where: { id: parseInt(id) },
-    data: replaceBody,
-    include: {
-      tapak_perkuburan: true,
-      zon_tapak_perkuburan: true,
-      ref_kategori_jenazah: true,
-      ref_status_kubur: true,
-    }
-  });
-};
-
 module.exports = {
   createLotKubur,
   getLotKuburs,
   getLotKuburById,
   updateLotKuburById,
-  replaceLotKuburById,
   deleteLotKuburById,
 };

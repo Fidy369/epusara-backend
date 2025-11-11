@@ -33,16 +33,10 @@ const deleteRefNegeri = catchAsync(async (req, res) => {
   res.status(204).send();
 });
 
-const replaceRefNegeri = catchAsync(async (req, res) => {
-  const result = await refNegeriService.replaceRefNegeriByKod(req.params.kod, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createRefNegeri,
   getRefNegeris,
   getRefNegeri,
-  replaceRefNegeri,
   updateRefNegeri,
   deleteRefNegeri,
 };

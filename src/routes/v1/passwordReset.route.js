@@ -94,33 +94,6 @@ router
  *         description: OK
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Update password reset entry
- *     tags: [Password Resets]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: resetId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               password:
- *                 type: string
- *               created_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   delete:
  *     summary: Delete password reset entry
  *     tags: [Password Resets]
@@ -141,7 +114,6 @@ router
 router
   .route('/:resetId')
   .get(auth('manageUsers'), validate(passwordResetValidation.getPasswordReset), passwordResetController.getPasswordReset)
-  .put(auth('manageUsers'), validate(passwordResetValidation.updatePasswordReset), passwordResetController.updatePasswordReset)
   .delete(auth('manageUsers'), validate(passwordResetValidation.deletePasswordReset), passwordResetController.deletePasswordReset);
 
 /**

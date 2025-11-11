@@ -176,50 +176,6 @@ const router = express.Router();
  *               $ref: '#/components/schemas/TapakPerkuburan'
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace a cemetery site
- *     tags: [TapakPerkuburan]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Cemetery site ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - nama_tapak
- *             properties:
- *               nama_tapak:
- *                 type: string
- *                 maxLength: 100
- *               lokasi_tapak:
- *                 type: string
- *                 maxLength: 255
- *               keluasan_tapak:
- *                 type: number
- *                 format: decimal
- *               kapasiti_lot_keseluruhan:
- *                 type: integer
- *               description:
- *                 type: string
- *                 maxLength: 255
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/TapakPerkuburan'
- *       "404":
- *         description: Not found
  *   delete:
  *     summary: Delete a cemetery site
  *     tags: [TapakPerkuburan]
@@ -246,7 +202,6 @@ router
   .route('/:id')
   .get(validate(tapakPerkuburanValidation.getTapakPerkuburan), tapakPerkuburanController.getTapakPerkuburan)
   .patch(validate(tapakPerkuburanValidation.updateTapakPerkuburan), tapakPerkuburanController.updateTapakPerkuburan)
-  .put(validate(tapakPerkuburanValidation.replaceTapakPerkuburan), tapakPerkuburanController.replaceTapakPerkuburan)
   .delete(validate(tapakPerkuburanValidation.deleteTapakPerkuburan), tapakPerkuburanController.deleteTapakPerkuburan);
 
 module.exports = router;

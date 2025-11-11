@@ -103,45 +103,8 @@ router
  *         description: OK
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace race reference (full update)
- *     tags: [RefBangsa]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Race ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - kod_bangsa
- *               - label_ms
- *               - label_en
- *             properties:
- *               kod_bangsa:
- *                 type: string
- *                 maxLength: 4
- *               label_ms:
- *                 type: string
- *                 maxLength: 50
- *               label_en:
- *                 type: string
- *                 maxLength: 50
- *               is_active:
- *                 type: boolean
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
  *   patch:
- *     summary: Update race reference (partial update)
+ *     summary: Update race reference
  *     tags: [RefBangsa]
  *     parameters:
  *       - in: path
@@ -192,7 +155,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(refBangsaValidation.getRefBangsa), refBangsaController.getRefBangsa)
-  .put(/*auth(),*/ validate(refBangsaValidation.replaceRefBangsa), refBangsaController.replaceRefBangsa)
   .patch(/*auth(),*/ validate(refBangsaValidation.updateRefBangsa), refBangsaController.updateRefBangsa)
   .delete(/*auth(),*/ validate(refBangsaValidation.deleteRefBangsa), refBangsaController.deleteRefBangsa);
 

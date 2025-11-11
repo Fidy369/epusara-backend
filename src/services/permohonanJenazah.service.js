@@ -77,27 +77,11 @@ const getByKategoriJenazah = async (refKategoriJenazahId) => {
   });
 };
 
-const replacePermohonanJenazahById = async (id, replaceBody) => {
-  const permohonanJenazah = await prisma.permohonan_jenazah.findUnique({
-    where: { id },
-  });
-
-  if (!permohonanJenazah) {
-    throw new Error('Permohonan jenazah not found');
-  }
-
-  return prisma.permohonan_jenazah.update({
-    where: { id },
-    data: replaceBody,
-  });
-};
-
 module.exports = {
   createPermohonanJenazah,
   getPermohonanJenazah,
   getPermohonanJenazahById,
   updatePermohonanJenazahById,
-  replacePermohonanJenazahById,
   deletePermohonanJenazahById,
   getByPermohonanId,
   getByKategoriJenazah,

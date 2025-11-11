@@ -47,20 +47,11 @@ const deletePasswordResetsByUser = catchAsync(async (req, res) => {
   res.send({ deleted_count: result.count });
 });
 
-const updatePasswordReset = catchAsync(async (req, res) => {
-  const reset = await passwordResetService.updatePasswordResetById(
-    parseInt(req.params.resetId),
-    req.body
-  );
-  res.send(reset);
-});
-
 module.exports = {
   createPasswordReset,
   queryPasswordResets,
   getPasswordReset,
   getPasswordResetByUser,
   deletePasswordReset,
-  updatePasswordReset,
   deletePasswordResetsByUser,
 };

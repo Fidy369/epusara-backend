@@ -28,12 +28,6 @@ const updatePermohonan = catchAsync(async (req, res) => {
   res.send(permohonan);
 });
 
-// ADD THIS NEW CONTROLLER FOR PUT
-const replacePermohonan = catchAsync(async (req, res) => {
-  const permohonan = await permohonanService.replacePermohonanById(parseInt(req.params.permohonanId), req.body);
-  res.send(permohonan);
-});
-
 const submitPermohonan = catchAsync(async (req, res) => {
   const permohonan = await permohonanService.submitPermohonan(parseInt(req.params.permohonanId));
   res.send(permohonan);
@@ -65,7 +59,6 @@ module.exports = {
   getPermohonans,
   getPermohonan,
   updatePermohonan,
-  replacePermohonan, // ADD THIS
   submitPermohonan,
   approvePermohonan,
   rejectPermohonan,

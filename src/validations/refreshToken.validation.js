@@ -49,23 +49,10 @@ const deleteRefreshTokensByUser = {
   }),
 };
 
-const replaceRefreshToken = {
-  params: Joi.object().keys({
-    tokenId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    user_id: Joi.number().integer().required(),
-    token: Joi.string().required(),
-    expires_at: Joi.date().required(),
-    is_revoked: Joi.boolean().required(),
-  }),
-};
-
 module.exports = {
   createRefreshToken,
   queryRefreshTokens,
   getRefreshToken,
-  replaceRefreshToken,
   getRefreshTokensByUser,
   revokeRefreshToken,
   deleteRefreshToken,

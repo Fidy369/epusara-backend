@@ -1,6 +1,4 @@
 const { PrismaClient } = require('@prisma/client');
-const httpStatus = require('http-status');
-const ApiError = require('../utils/ApiError');
 const prisma = new PrismaClient();
 
 const createPermohonanAnggotaBadan = async (data) => {
@@ -28,7 +26,7 @@ const getPermohonanAnggotaBadan = async (filter, options) => {
 
 const getPermohonanAnggotaBadanById = async (id) => {
   return prisma.permohonan_anggota_badan.findUnique({
-    where: { id: parseInt(id) },
+    where: { id },
     include: {
       permohonan: true,
     },
@@ -36,42 +34,15 @@ const getPermohonanAnggotaBadanById = async (id) => {
 };
 
 const updatePermohonanAnggotaBadanById = async (id, updateBody) => {
-  const record = await getPermohonanAnggotaBadanById(id);
-  if (!record) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Permohonan anggota badan not found');
-  }
   return prisma.permohonan_anggota_badan.update({
-    where: { id: parseInt(id) },
+    where: { id },
     data: updateBody,
   });
 };
 
-// ADD THIS NEW SERVICE FOR PUT
-const replacePermohonanAnggotaBadanById = async (id, replaceBody) => {
-  const record = await getPermohonanAnggotaBadanById(id);
-  if (!record) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Permohonan anggota badan not found');
-  }
-  
-  return prisma.permohonan_anggota_badan.update({
-    where: { id: parseInt(id) },
-    data: {
-      permohonan_id: replaceBody.permohonan_id,
-      ref_bahagian_badan_kod: replaceBody.ref_bahagian_badan_kod,
-      bahagian_badan_others: replaceBody.bahagian_badan_others || null,
-      updated_by: replaceBody.updated_by || 0,
-      updated_at: new Date(),
-    },
-  });
-};
-
 const deletePermohonanAnggotaBadanById = async (id) => {
-  const record = await getPermohonanAnggotaBadanById(id);
-  if (!record) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Permohonan anggota badan not found');
-  }
   return prisma.permohonan_anggota_badan.delete({
-    where: { id: parseInt(id) },
+    where: { id },
   });
 };
 
@@ -95,7 +66,6 @@ module.exports = {
   getPermohonanAnggotaBadan,
   getPermohonanAnggotaBadanById,
   updatePermohonanAnggotaBadanById,
-  replacePermohonanAnggotaBadanById, // ADD THIS
   deletePermohonanAnggotaBadanById,
   getByPermohonanId,
   deleteByPermohonanId,

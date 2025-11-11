@@ -29,12 +29,6 @@ const updateRefJenisPermohonan = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-// ADD THIS NEW CONTROLLER FOR PUT
-const replaceRefJenisPermohonan = catchAsync(async (req, res) => {
-  const result = await refJenisPermohonanService.replaceRefJenisPermohonanByKod(req.params.kod, req.body);
-  res.send(result);
-});
-
 const deleteRefJenisPermohonan = catchAsync(async (req, res) => {
   await refJenisPermohonanService.deleteRefJenisPermohonanByKod(req.params.kod);
   res.status(204).send();
@@ -50,6 +44,5 @@ module.exports = {
   getRefJenisPermohonans,
   getRefJenisPermohonan,
   updateRefJenisPermohonan,
-  replaceRefJenisPermohonan, // ADD THIS
   deleteRefJenisPermohonan,
 };

@@ -141,41 +141,6 @@ router
  *         description: OK
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace country reference (full update)
- *     tags: [RefNegara]
- *     parameters:
- *       - in: path
- *         name: kod
- *         required: true
- *         schema:
- *           type: string
- *           maxLength: 2
- *         description: Country code (ISO 2-letter)
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - label_ms
- *               - label_en
- *             properties:
- *               label_ms:
- *                 type: string
- *                 maxLength: 150
- *               label_en:
- *                 type: string
- *                 maxLength: 150
- *               is_active:
- *                 type: boolean
- *                 default: false
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
  *   delete:
  *     summary: Delete country reference
  *     tags: [RefNegara]
@@ -197,7 +162,6 @@ router
   .route('/:kod')
   .get(/*auth(),*/ validate(refNegaraValidation.getRefNegara), refNegaraController.getRefNegara)
   .patch(/*auth(),*/ validate(refNegaraValidation.updateRefNegara), refNegaraController.updateRefNegara)
-  .put(/*auth(),*/ validate(refNegaraValidation.replaceRefNegara), refNegaraController.replaceRefNegara)
   .delete(/*auth(),*/ validate(refNegaraValidation.deleteRefNegara), refNegaraController.deleteRefNegara);
 
 module.exports = router;

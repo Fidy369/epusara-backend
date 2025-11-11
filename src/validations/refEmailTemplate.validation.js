@@ -58,26 +58,10 @@ const deleteRefEmailTemplate = {
   }),
 };
 
-const replaceRefEmailTemplate = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    kod_email_template: Joi.string().max(50).required(),
-    description: Joi.string().max(50).required(),
-    title: Joi.string().max(50).required(),
-    content: Joi.string().max(50).required(),
-    is_active: Joi.boolean().default(false),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createRefEmailTemplate,
   getRefEmailTemplates,
   getRefEmailTemplate,
-  getRefEmailTemplateByKod,
-  replaceRefEmailTemplate,
   updateRefEmailTemplate,
   deleteRefEmailTemplate,
 };

@@ -128,48 +128,6 @@ router
  *     responses:
  *       "200":
  *         description: OK
- *   put:
- *     summary: Update user roles (replace all existing roles)
- *     tags: [User Roles]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: userId
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - role_ids
- *             properties:
- *               role_ids:
- *                 type: array
- *                 items:
- *                   type: integer
- *                 minItems: 1
- *                 example: [1, 3, 5]
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 user_id:
- *                   type: integer
- *                 roles:
- *                   type: array
- *                   items:
- *                     type: object
- *                 updated_count:
- *                   type: integer
  *   delete:
  *     summary: Remove all roles from user
  *     tags: [User Roles]
@@ -195,7 +153,6 @@ router
 router
   .route('/user/:userId')
   .get(auth('getUsers'), validate(userRoleValidation.getRolesByUser), userRoleController.getRolesByUser)
-  .put(auth('manageUsers'), validate(userRoleValidation.updateUserRoles), userRoleController.updateUserRoles)
   .delete(auth('manageUsers'), validate(userRoleValidation.removeAllRolesFromUser), userRoleController.removeAllRolesFromUser);
 
 /**

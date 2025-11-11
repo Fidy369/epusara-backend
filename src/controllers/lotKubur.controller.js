@@ -33,16 +33,10 @@ const deleteLotKubur = catchAsync(async (req, res) => {
   res.status(204).send();
 });
 
-const replaceLotKubur = catchAsync(async (req, res) => {
-  const result = await lotKuburService.replaceLotKuburById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createLotKubur,
   getLotKuburs,
   getLotKubur,
   updateLotKubur,
-  replaceLotKubur,
   deleteLotKubur,
 };

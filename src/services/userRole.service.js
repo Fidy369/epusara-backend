@@ -119,44 +119,12 @@ const removeAllUsersFromRole = async (roleId) => {
   });
 };
 
-/**
- * Update user roles (replace all existing roles)
- */
-const updateUserRoles = async (userId, roleIds) => {
-  // Use a transaction to ensure atomicity
-  return prisma.$transaction(async (tx) => {
-    // Remove all existing roles
-    await tx.user_role.deleteMany({
-      where: { user_id: userId }
-    });
-
-    // Add new roles
-    const assignments = await Promise.all(
-      roleIds.map(roleId =>
-        tx.user_role.create({
-          data: { user_id: userId, role_id: roleId },
-          include: {
-            role: true
-          }
-        })
-      )
-    );
-
-    return {
-      user_id: userId,
-      roles: assignments.map(a => a.role),
-      updated_count: assignments.length
-    };
-  });
-};
-
 module.exports = {
   assignRoleToUser,
   queryUserRoleAssignments,
   getRolesByUser,
   getUsersByRole,
   removeRoleFromUser,
-  updateUserRoles,
   removeAllRolesFromUser,
   removeAllUsersFromRole,
 };

@@ -52,22 +52,6 @@ const getActiveTemplates = async () => {
   });
 };
 
-const replaceEmailTemplateById = async (id, replaceBody) => {
-  // Check if template exists
-  const emailTemplate = await prisma.email_template.findUnique({
-    where: { id },
-  });
-  
-  if (!emailTemplate) {
-    throw new Error('Email template not found');
-  }
-
-  return prisma.email_template.update({
-    where: { id },
-    data: replaceBody,
-  });
-};
-
 module.exports = {
   createEmailTemplate,
   getEmailTemplates,
@@ -76,5 +60,4 @@ module.exports = {
   updateEmailTemplateById,
   deleteEmailTemplateById,
   getActiveTemplates,
-  replaceEmailTemplateById,
 };

@@ -29,12 +29,6 @@ const updatePermohonanAnggotaBadan = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-// ADD THIS NEW CONTROLLER FOR PUT
-const replacePermohonanAnggotaBadan = catchAsync(async (req, res) => {
-  const result = await permohonanAnggotaBadanService.replacePermohonanAnggotaBadanById(req.params.id, req.body);
-  res.send(result);
-});
-
 const deletePermohonanAnggotaBadan = catchAsync(async (req, res) => {
   await permohonanAnggotaBadanService.deletePermohonanAnggotaBadanById(req.params.id);
   res.status(httpStatus.NO_CONTENT).send();
@@ -55,7 +49,6 @@ module.exports = {
   getPermohonanAnggotaBadan,
   getPermohonanAnggotaBadanById,
   updatePermohonanAnggotaBadan,
-  replacePermohonanAnggotaBadan, // ADD THIS
   deletePermohonanAnggotaBadan,
   getByPermohonanId,
   deleteByPermohonanId,

@@ -47,18 +47,10 @@ const getActiveRefJenisHaiwan = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replaceRefJenisHaiwan = catchAsync(async (req, res) => {
-  const result = await refJenisHaiwanService.replaceRefJenisHaiwanById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createRefJenisHaiwan,
   getRefJenisHaiwans,
   getRefJenisHaiwan,
-  getRefJenisHaiwanByKod,
-  getActiveRefJenisHaiwan,
-  replaceRefJenisHaiwan,
   updateRefJenisHaiwan,
   deleteRefJenisHaiwan,
 };

@@ -65,18 +65,12 @@ const removeMenuFromRole = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-const putMenu = catchAsync(async (req, res) => {
-  const menu = await menuService.updateMenuById(parseInt(req.params.menuId), req.body);
-  res.send(menu);
-});
-
 module.exports = {
   createMenu,
   getMenuHierarchy,
   getUserMenu,
   queryMenus,
   getMenu,
-  putMenu,
   updateMenu,
   deleteMenu,
   assignMenuToRole,

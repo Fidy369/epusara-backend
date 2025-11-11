@@ -41,18 +41,6 @@ const updateAuditEvent = {
     .min(1),
 };
 
-const replaceAuditEvent = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    user_id: Joi.number().integer().allow(null),
-    ip_address: Joi.string().max(45).allow(null),
-    event: Joi.string().max(50).required(),
-    description: Joi.string().max(500).allow(null),
-  }),
-};
-
 const deleteAuditEvent = {
   params: Joi.object().keys({
     id: Joi.number().integer().required(),
@@ -76,7 +64,6 @@ module.exports = {
   getAuditEvents,
   getAuditEventById,
   updateAuditEvent,
-  replaceAuditEvent,
   deleteAuditEvent,
   getByUserId,
   getByEvent,

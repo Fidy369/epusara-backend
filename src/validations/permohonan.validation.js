@@ -65,18 +65,6 @@ const updatePermohonan = {
     .min(1),
 };
 
-// ADD THIS NEW VALIDATION FOR PUT
-const replacePermohonan = {
-  params: Joi.object().keys({
-    permohonanId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    kod_jenis_permohonan: Joi.string().length(2).required(),
-    ref_kategori_jenazah_id: Joi.number().integer().required(),
-    status_permohonan: Joi.string().valid('DRAFT', 'IN_PROGRESS', 'APPROVED', 'REJECTED', 'CANCELLED', 'FINISHED').optional(),
-  }),
-};
-
 const submitPermohonan = {
   params: Joi.object().keys({
     permohonanId: Joi.number().integer().required(),
@@ -112,7 +100,6 @@ module.exports = {
   getPermohonans,
   getPermohonan,
   updatePermohonan,
-  replacePermohonan, // ADD THIS
   submitPermohonan,
   approvePermohonan,
   rejectPermohonan,

@@ -74,20 +74,6 @@ const incrementAttempts = {
   }),
 };
 
-const replaceEmailQueue = {
-  params: Joi.object().keys({
-    emailQueueId: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    recipient: Joi.string().email().max(255).required(),
-    subject: Joi.string().max(255).required(),
-    body: Joi.string().required(),
-    status: Joi.string().valid('pending', 'sent', 'failed').required(),
-    attempts: Joi.number().integer().min(0).default(0),
-    last_error: Joi.string().allow(null, ''),
-  }),
-};
-
 module.exports = {
   createEmailQueue,
   getEmailQueues,
@@ -97,5 +83,4 @@ module.exports = {
   getEmailQueuesByStatus,
   updateEmailQueueStatus,
   incrementAttempts,
-  replaceEmailQueue,
 };

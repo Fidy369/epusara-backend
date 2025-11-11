@@ -51,16 +51,10 @@ const deletePermohonanDetail = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-const replacePermohonanDetail = catchAsync(async (req, res) => {
-  const detail = await permohonanDetailService.replacePermohonanDetailById(parseInt(req.params.detailId), req.body);
-  res.send(detail);
-});
-
 module.exports = {
   createPermohonanDetail,
   queryPermohonanDetails,
   getPermohonanDetail,
-  replacePermohonanDetail,
   getPermohonanDetailByPermohonanId,
   updatePermohonanDetail,
   deletePermohonanDetail,

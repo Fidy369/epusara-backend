@@ -49,18 +49,10 @@ const removeAllUsersFromRole = catchAsync(async (req, res) => {
   res.send({ deleted_count: result.count });
 });
 
-const updateUserRoles = catchAsync(async (req, res) => {
-  const { role_ids } = req.body;
-  const userId = parseInt(req.params.userId);
-  const result = await userRoleService.updateUserRoles(userId, role_ids);
-  res.send(result);
-});
-
 module.exports = {
   assignRoleToUser,
   queryUserRoleAssignments,
   getRolesByUser,
-  updateUserRoles,
   getUsersByRole,
   removeRoleFromUser,
   removeAllRolesFromUser,

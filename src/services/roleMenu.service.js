@@ -75,39 +75,10 @@ const removeAllMenusFromRole = async (roleId) => {
   });
 };
 
-const replaceRoleMenus = async (roleId, menuIds, updatedBy = 0) => {
-  // Use transaction to ensure atomicity
-  return prisma.$transaction(async (tx) => {
-    // First, delete all existing menu assignments for this role
-    await tx.role_menu.deleteMany({
-      where: { role_id: roleId },
-    });
-
-    // Then, create new assignments
-    const assignments = menuIds.map(menuId => ({
-      role_id: roleId,
-      menu_id: menuId,
-      created_by: updatedBy,
-      updated_by: updatedBy,
-    }));
-
-    await tx.role_menu.createMany({
-      data: assignments,
-    });
-
-    // Return the new assignments
-    return tx.role_menu.findMany({
-      where: { role_id: roleId },
-      include: { menu: true },
-    });
-  });
-};
-
 module.exports = {
   assignMenuToRole,
   getRoleMenus,
   getMenusByRole,
-  replaceRoleMenus,
   getRolesByMenu,
   removeMenuFromRole,
   bulkAssignMenusToRole,

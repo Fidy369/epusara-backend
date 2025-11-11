@@ -177,53 +177,8 @@ router
  *               $ref: '#/components/schemas/PermohonanBayaran'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace application payment (full update)
- *     tags: [PermohonanBayaran]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Payment ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - permohonan_id
- *             properties:
- *               no_akaun:
- *                 type: string
- *               no_bil_pelbagai:
- *                 type: string
- *               no_resit:
- *                 type: string
- *               permohonan_id:
- *                 type: integer
- *               payment_deadline:
- *                 type: string
- *                 format: date-time
- *               status_bayaran:
- *                 type: string
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/PermohonanBayaran'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update application payment (partial update)
+ *     summary: Update application payment
  *     tags: [PermohonanBayaran]
  *     security:
  *       - bearerAuth: []
@@ -286,7 +241,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(permohonanBayaranValidation.getPermohonanBayaranById), permohonanBayaranController.getPermohonanBayaranById)
-  .put(/*auth(),*/ validate(permohonanBayaranValidation.replacePermohonanBayaran), permohonanBayaranController.replacePermohonanBayaran)
   .patch(/*auth(),*/ validate(permohonanBayaranValidation.updatePermohonanBayaran), permohonanBayaranController.updatePermohonanBayaran)
   .delete(/*auth(),*/ validate(permohonanBayaranValidation.deletePermohonanBayaran), permohonanBayaranController.deletePermohonanBayaran);
 

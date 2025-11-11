@@ -57,27 +57,10 @@ const deleteLotKubur = {
   }),
 };
 
-const replaceLotKubur = {
-  params: Joi.object().keys({
-    id: Joi.number().integer().required(),
-  }),
-  body: Joi.object().keys({
-    tapak_perkuburan_id: Joi.number().integer().required(),
-    zon_id: Joi.number().integer().required(),
-    kod_kategori_jenazah: Joi.string().length(4),
-    kategori_jenazah_id: Joi.number().integer(),
-    no_lot: Joi.string().max(50).default(''),
-    kod_status_kubur: Joi.string().length(2).default('AV'),
-    gis_id: Joi.number().integer(),
-    updated_by: Joi.number().integer().default(0),
-  }),
-};
-
 module.exports = {
   createLotKubur,
   getLotKuburs,
   getLotKubur,
   updateLotKubur,
-  replaceLotKubur,
   deleteLotKubur,
 };

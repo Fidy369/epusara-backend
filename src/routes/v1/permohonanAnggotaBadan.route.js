@@ -154,48 +154,8 @@ router
  *               $ref: '#/components/schemas/PermohonanAnggotaBadan'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace application body parts (full update)
- *     tags: [PermohonanAnggotaBadan]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Body parts ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - permohonan_id
- *               - ref_bahagian_badan_kod
- *             properties:
- *               permohonan_id:
- *                 type: integer
- *               ref_bahagian_badan_kod:
- *                 type: string
- *                 maxLength: 4
- *               bahagian_badan_others:
- *                 type: string
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/PermohonanAnggotaBadan'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update application body parts (partial update)
+ *     summary: Update application body parts
  *     tags: [PermohonanAnggotaBadan]
  *     security:
  *       - bearerAuth: []
@@ -252,7 +212,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(permohonanAnggotaBadanValidation.getPermohonanAnggotaBadanById), permohonanAnggotaBadanController.getPermohonanAnggotaBadanById)
-  .put(/*auth(),*/ validate(permohonanAnggotaBadanValidation.replacePermohonanAnggotaBadan), permohonanAnggotaBadanController.replacePermohonanAnggotaBadan)
   .patch(/*auth(),*/ validate(permohonanAnggotaBadanValidation.updatePermohonanAnggotaBadan), permohonanAnggotaBadanController.updatePermohonanAnggotaBadan)
   .delete(/*auth(),*/ validate(permohonanAnggotaBadanValidation.deletePermohonanAnggotaBadan), permohonanAnggotaBadanController.deletePermohonanAnggotaBadan);
 

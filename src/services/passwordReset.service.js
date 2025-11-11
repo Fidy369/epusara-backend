@@ -86,29 +86,11 @@ const deletePasswordResetsByUser = async (userId) => {
   });
 };
 
-/**
- * Update password reset by id
- */
-const updatePasswordResetById = async (id, updateBody) => {
-  const reset = await getPasswordResetById(id);
-  if (!reset) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Password reset not found');
-  }
-  return prisma.password_resets.update({
-    where: { id },
-    data: updateBody,
-    include: {
-      users: true
-    }
-  });
-};
-
 module.exports = {
   createPasswordReset,
   queryPasswordResets,
   getPasswordResetById,
   getPasswordResetByUser,
-  updatePasswordResetById,
   deletePasswordResetById,
   deletePasswordResetsByUser,
 };

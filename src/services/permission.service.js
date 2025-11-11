@@ -164,37 +164,11 @@ const removePermissionFromRole = async (roleId, permissionId) => {
   });
 };
 
-/**
- * Replace permission by id (PUT)
- * @param {number} permissionId
- * @param {Object} replaceBody
- * @returns {Promise<Permission>}
- */
-const replacePermissionById = async (permissionId, replaceBody) => {
-  const permission = await getPermissionById(permissionId);
-  if (!permission) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Permission not found');
-  }
-  
-  const nameExists = await prisma.permission.findFirst({
-    where: { name: replaceBody.name, id: { not: permissionId } }
-  });
-  if (nameExists) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Permission name already exists');
-  }
-
-  return prisma.permission.update({
-    where: { id: permissionId },
-    data: replaceBody,
-  });
-};
-
 module.exports = {
   createPermission,
   queryPermissions,
   getPermissionById,
   updatePermissionById,
-  replacePermissionById,
   deletePermissionById,
   assignPermissionToRole,
   removePermissionFromRole,

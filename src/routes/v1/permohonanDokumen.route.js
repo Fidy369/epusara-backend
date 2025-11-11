@@ -155,47 +155,8 @@ router
  *               $ref: '#/components/schemas/PermohonanDokumen'
  *       "404":
  *         $ref: '#/components/responses/NotFound'
- *   put:
- *     summary: Replace application document (full update)
- *     tags: [PermohonanDokumen]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Document ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - permohonan_id
- *               - jenis_dokumen
- *             properties:
- *               permohonan_id:
- *                 type: integer
- *               jenis_dokumen:
- *                 type: string
- *               attachment_id:
- *                 type: integer
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/PermohonanDokumen'
- *       "404":
- *         $ref: '#/components/responses/NotFound'
  *   patch:
- *     summary: Update application document (partial update)
+ *     summary: Update application document
  *     tags: [PermohonanDokumen]
  *     security:
  *       - bearerAuth: []
@@ -251,7 +212,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(permohonanDokumenValidation.getPermohonanDokumenById), permohonanDokumenController.getPermohonanDokumenById)
-  .put(/*auth(),*/ validate(permohonanDokumenValidation.putPermohonanDokumen), permohonanDokumenController.putPermohonanDokumen)
   .patch(/*auth(),*/ validate(permohonanDokumenValidation.updatePermohonanDokumen), permohonanDokumenController.updatePermohonanDokumen)
   .delete(/*auth(),*/ validate(permohonanDokumenValidation.deletePermohonanDokumen), permohonanDokumenController.deletePermohonanDokumen);
 

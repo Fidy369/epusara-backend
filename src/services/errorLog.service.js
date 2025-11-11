@@ -86,20 +86,6 @@ const getErrorStatistics = async (hours = 24) => {
   };
 };
 
-/**
- * Update error log by id
- */
-const updateErrorLogById = async (id, updateBody) => {
-  const errorLog = await getErrorLogById(id);
-  if (!errorLog) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Error log not found');
-  }
-  return prisma.error_logs.update({
-    where: { id },
-    data: updateBody
-  });
-};
-
 module.exports = {
   createErrorLog,
   queryErrorLogs,
@@ -107,5 +93,4 @@ module.exports = {
   deleteErrorLogById,
   clearOldErrorLogs,
   getErrorStatistics,
-  updateErrorLogById,
 };

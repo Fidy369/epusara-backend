@@ -183,49 +183,6 @@ const router = express.Router();
  *               $ref: '#/components/schemas/RefStatusKubur'
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace a reference grave status
- *     tags: [RefStatusKubur]
- *     parameters:
- *       - in: path
- *         name: kod
- *         required: true
- *         schema:
- *           type: string
- *         description: Grave status code
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - label_ms
- *               - label_en
- *               - color
- *             properties:
- *               label_ms:
- *                 type: string
- *                 maxLength: 50
- *               label_en:
- *                 type: string
- *                 maxLength: 50
- *               color:
- *                 type: string
- *                 maxLength: 7
- *               is_active:
- *                 type: boolean
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/RefStatusKubur'
- *       "404":
- *         description: Not found
  *   delete:
  *     summary: Delete a reference grave status
  *     tags: [RefStatusKubur]
@@ -252,7 +209,6 @@ router
   .route('/:kod')
   .get(validate(refStatusKuburValidation.getRefStatusKubur), refStatusKuburController.getRefStatusKubur)
   .patch(validate(refStatusKuburValidation.updateRefStatusKubur), refStatusKuburController.updateRefStatusKubur)
-  .put(validate(refStatusKuburValidation.replaceRefStatusKubur), refStatusKuburController.replaceRefStatusKubur)
   .delete(validate(refStatusKuburValidation.deleteRefStatusKubur), refStatusKuburController.deleteRefStatusKubur);
 
 module.exports = router;

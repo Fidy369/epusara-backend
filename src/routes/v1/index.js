@@ -53,6 +53,10 @@ const defaultRoutes = [
     route: require('./userProfile.route'),
   },
   {
+    path: '/user-profiles',
+    route: require('./userProfile.route'),
+  },
+  {
     path: '/password_history',
     route: require('./passwordHistory.route'),
   },

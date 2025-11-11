@@ -37,13 +37,15 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - name
- *               - email
+ *               - ic
+ *               - emel
  *               - password
+ *               - nama_penuh
  *             properties:
- *               name:
+ *               ic:
  *                 type: string
- *               email:
+ *                 description: IC number or passport number
+ *               emel:
  *                 type: string
  *                 format: email
  *                 description: must be unique
@@ -52,10 +54,14 @@ module.exports = router;
  *                 format: password
  *                 minLength: 8
  *                 description: At least one number and one letter
+ *               nama_penuh:
+ *                 type: string
+ *                 description: Full name
  *             example:
- *               name: fake name
- *               email: fake@example.com
+ *               ic: "123456789012"
+ *               emel: fake@example.com
  *               password: password1
+ *               nama_penuh: "Ahmad Ali"
  *     responses:
  *       "201":
  *         description: Created
@@ -85,17 +91,17 @@ module.exports = router;
  *           schema:
  *             type: object
  *             required:
- *               - email
+ *               - no_pengenalan
  *               - password
  *             properties:
- *               email:
+ *               no_pengenalan:
  *                 type: string
- *                 format: email
+ *                 description: IC number or passport number
  *               password:
  *                 type: string
  *                 format: password
  *             example:
- *               email: fake@example.com
+ *               no_pengenalan: "123456789012"
  *               password: password1
  *     responses:
  *       "200":
@@ -110,14 +116,14 @@ module.exports = router;
  *                 tokens:
  *                   $ref: '#/components/schemas/AuthTokens'
  *       "401":
- *         description: Invalid email or password
+ *         description: Invalid IC/passport number or password
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Error'
  *             example:
  *               code: 401
- *               message: Invalid email or password
+ *               message: Invalid IC/passport number or password
  */
 
 /**

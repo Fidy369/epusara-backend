@@ -114,47 +114,8 @@ router
  *         description: OK
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace animal type reference (full update)
- *     tags: [RefJenisHaiwan]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Animal type ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - kod_jenis_haiwan
- *               - label_ms
- *               - label_en
- *               - is_active
- *             properties:
- *               kod_jenis_haiwan:
- *                 type: string
- *                 maxLength: 4
- *               label_ms:
- *                 type: string
- *                 maxLength: 50
- *               label_en:
- *                 type: string
- *                 maxLength: 50
- *               is_active:
- *                 type: integer
- *                 enum: [0, 1]
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
  *   patch:
- *     summary: Update animal type reference (partial update)
+ *     summary: Update animal type reference
  *     tags: [RefJenisHaiwan]
  *     parameters:
  *       - in: path
@@ -206,7 +167,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(refJenisHaiwanValidation.getRefJenisHaiwan), refJenisHaiwanController.getRefJenisHaiwan)
-  .put(/*auth(),*/ validate(refJenisHaiwanValidation.replaceRefJenisHaiwan), refJenisHaiwanController.replaceRefJenisHaiwan)
   .patch(/*auth(),*/ validate(refJenisHaiwanValidation.updateRefJenisHaiwan), refJenisHaiwanController.updateRefJenisHaiwan)
   .delete(/*auth(),*/ validate(refJenisHaiwanValidation.deleteRefJenisHaiwan), refJenisHaiwanController.deleteRefJenisHaiwan);
 

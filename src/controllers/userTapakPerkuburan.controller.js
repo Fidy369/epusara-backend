@@ -28,20 +28,9 @@ const removeUserFromSite = catchAsync(async (req, res) => {
   res.status(204).send();
 });
 
-// NEW: Update controller
-const updateUserSiteAssignment = catchAsync(async (req, res) => {
-  const result = await userTapakPerkuburanService.updateUserSiteAssignment(
-    req.params.userId,
-    req.params.siteId,
-    req.body
-  );
-  res.send(result);
-});
-
 module.exports = {
   assignUserToSite,
   getUserSiteAssignments,
-  updateUserSiteAssignment,
   getUserSiteAssignment,
   removeUserFromSite,
 };

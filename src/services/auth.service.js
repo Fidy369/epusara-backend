@@ -9,18 +9,23 @@ const { tokenTypes } = require('../config/tokens');
 const prisma = new PrismaClient();
 
 /**
- * Login with username and password
- * @param {string} email
+ * Login with IC/passport number and password
+ * @param {string} no_pengenalan
  * @param {string} password
  * @returns {Promise<User>}
  */
-const loginUserWithEmailAndPassword = async (email, password) => {
-  // Find user by email
-  const user = await userService.getUserByEmail(email);
+const loginUserWithIcAndPassword = async (no_pengenalan, password) => {
+  // Find user by IC/passport number from user_profile table
+  const userProfile = await prisma.user_profile.findFirst({
+    where: { no_pengenalan },
+    include: { users: true }
+  });
   
-  if (!user) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
+  if (!userProfile || !userProfile.users) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect IC/passport number or password');
   }
+  
+  const user = userProfile.users;
   
   //bro why tf this library doesn't support 2y$
   let hash = user.password;
@@ -29,7 +34,7 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   }
   
   if (!(await bcrypt.compare(password, hash))) {
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect email or password');
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Incorrect IC/passport number or password');
   }
   return user;
 };
@@ -114,7 +119,7 @@ const verifyEmail = async (verifyEmailToken) => {
 };
 
 module.exports = {
-  loginUserWithEmailAndPassword,
+  loginUserWithIcAndPassword,
   logout,
   refreshAuth,
   resetPassword,

@@ -41,20 +41,10 @@ const removeAllMenusFromRole = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
-const replaceRoleMenus = catchAsync(async (req, res) => {
-  const result = await roleMenuService.replaceRoleMenus(
-    parseInt(req.params.roleId), 
-    req.body.menu_ids, 
-    req.body.updated_by
-  );
-  res.send(result);
-});
-
 module.exports = {
   assignMenuToRole,
   getRoleMenus,
   getMenusByRole,
-  replaceRoleMenus,
   getRolesByMenu,
   removeMenuFromRole,
   bulkAssignMenusToRole,

@@ -9,8 +9,8 @@ let server;
 
 prisma.$connect().then(() => {
   logger.info('Connected to MySQL via Prisma');
-  server = app.listen(config.port, () => {
-    logger.info(`Listening to port ${config.port}`);
+  server = app.listen(config.port, '0.0.0.0', () => {
+    logger.info(`Listening to port ${config.port} on all interfaces`);
   });
 }).catch((error) => {
   logger.error('Failed to connect to MySQL:', error);

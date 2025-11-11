@@ -14,7 +14,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(pertanyaanFaqValidation.getPertanyaanFaq), pertanyaanFaqController.getPertanyaanFaq)
-  .put(/*auth(),*/ validate(pertanyaanFaqValidation.replacePertanyaanFaq), pertanyaanFaqController.replacePertanyaanFaq)
   .patch(/*auth(),*/ validate(pertanyaanFaqValidation.updatePertanyaanFaq), pertanyaanFaqController.updatePertanyaanFaq)
   .delete(/*auth(),*/ validate(pertanyaanFaqValidation.deletePertanyaanFaq), pertanyaanFaqController.deletePertanyaanFaq);
 
@@ -122,58 +121,8 @@ module.exports = router;
  *       "404":
  *         description: Not found
  *
- *   put:
- *     summary: Replace FAQ (full update - requires all fields)
- *     tags: [Pertanyaan FAQ]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - kod_kategori_pertanyaan
- *               - question_ms
- *               - answer_ms
- *               - question_en
- *               - answer_en
- *             properties:
- *               kod_kategori_pertanyaan:
- *                 type: string
- *                 maxLength: 5
- *               question_ms:
- *                 type: string
- *                 maxLength: 500
- *               answer_ms:
- *                 type: string
- *                 maxLength: 1000
- *               question_en:
- *                 type: string
- *                 maxLength: 500
- *               answer_en:
- *                 type: string
- *                 maxLength: 1000
- *               order:
- *                 type: integer
- *                 minimum: 0
- *               is_active:
- *                 type: boolean
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
- *
  *   patch:
- *     summary: Update FAQ (partial update - only provided fields)
+ *     summary: Update FAQ
  *     tags: [Pertanyaan FAQ]
  *     parameters:
  *       - in: path

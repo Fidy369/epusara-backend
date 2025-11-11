@@ -44,16 +44,10 @@ const getByStatus = catchAsync(async (req, res) => {
   res.send(result);
 });
 
-const replacePermohonanBayaran = catchAsync(async (req, res) => {
-  const result = await permohonanBayaranService.replacePermohonanBayaranById(req.params.id, req.body);
-  res.send(result);
-});
-
 module.exports = {
   createPermohonanBayaran,
   getPermohonanBayaran,
   getPermohonanBayaranById,
-  replacePermohonanBayaran,
   updatePermohonanBayaran,
   deletePermohonanBayaran,
   getByPermohonanId,

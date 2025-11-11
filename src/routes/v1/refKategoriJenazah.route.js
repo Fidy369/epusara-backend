@@ -116,54 +116,8 @@ router
  *         description: OK
  *       "404":
  *         description: Not found
- *   put:
- *     summary: Replace deceased category reference (full update)
- *     tags: [RefKategoriJenazah]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         description: Deceased category ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - kod_kategori_jenazah
- *               - label_ms
- *               - label_en
- *               - flag_aktif
- *             properties:
- *               kod_kategori_jenazah:
- *                 type: string
- *                 maxLength: 4
- *               label_ms:
- *                 type: string
- *                 maxLength: 50
- *               label_en:
- *                 type: string
- *                 maxLength: 50
- *               harga:
- *                 type: number
- *                 format: decimal
- *                 minimum: 0
- *                 default: 0.00
- *               flag_aktif:
- *                 type: integer
- *                 enum: [0, 1]
- *               updated_by:
- *                 type: integer
- *     responses:
- *       "200":
- *         description: OK
- *       "404":
- *         description: Not found
  *   patch:
- *     summary: Update deceased category reference (partial update)
+ *     summary: Update deceased category reference
  *     tags: [RefKategoriJenazah]
  *     parameters:
  *       - in: path
@@ -219,7 +173,6 @@ router
 router
   .route('/:id')
   .get(/*auth(),*/ validate(refKategoriJenazahValidation.getRefKategoriJenazah), refKategoriJenazahController.getRefKategoriJenazah)
-  .put(/*auth(),*/ validate(refKategoriJenazahValidation.replaceRefKategoriJenazah), refKategoriJenazahController.replaceRefKategoriJenazah)
   .patch(/*auth(),*/ validate(refKategoriJenazahValidation.updateRefKategoriJenazah), refKategoriJenazahController.updateRefKategoriJenazah)
   .delete(/*auth(),*/ validate(refKategoriJenazahValidation.deleteRefKategoriJenazah), refKategoriJenazahController.deleteRefKategoriJenazah);
 
